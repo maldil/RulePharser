@@ -459,7 +459,7 @@ public class GrammarActions {
     //     a better long guard than ndigits > 11 (this is much to short for
     //     binary for example)
     Object makeInt(Token t) {
-        String s = t.getText();
+        String s = t.getText().replaceAll("_","");
         int radix = 10;
         if (s.startsWith("0x") || s.startsWith("0X")) {
             radix = 16;

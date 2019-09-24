@@ -796,6 +796,21 @@ expr_stmt
            }
           )
         )
+    | (testlist_star_expr[null] ':' test[null] ASSIGN) => lhs=testlist_star_expr[expr_contextType.Store] ':' test[null]
+        (
+        | ((at=ASSIGN t+=testlist_star_expr[expr_contextType.Store])+
+            {
+                stype = new Assign($lhs.tree, actions.makeAssignTargets(
+                    actions.castExpr($lhs.tree), $t), actions.makeAssignValue($t));
+            }
+          )
+        | ((ay=ASSIGN y2+=yield_expr)+
+            {
+                stype = new Assign($lhs.start, actions.makeAssignTargets(
+                    actions.castExpr($lhs.tree), $y2), actions.makeAssignValue($y2));
+            }
+          )
+        )
     | (testlist_star_expr[null] ASSIGN) => lhs=testlist_star_expr[expr_contextType.Store]
         (
         | ((at=ASSIGN t+=testlist_star_expr[expr_contextType.Store])+
@@ -1855,7 +1870,35 @@ atom_expr
 @after {
     $atom_expr.tree = $etype;
 }
-    : (AWAIT? atom) => AWAIT? atom (t+=trailer[$atom.start, $atom.tree])*
+    : AWAIT atom (t+=trailer[$atom.start, $atom.tree])*
+      {
+          $lparen = $atom.lparen;
+          //XXX: This could be better.
+          $etype = actions.castExpr($atom.tree);
+          if ($t != null) {
+              for(Object o : $t) {
+                  actions.recurseSetContext($etype, expr_contextType.Load);
+                  if (o instanceof Call) {
+                      Call c = (Call)o;
+                      c.setCharStartIndex($etype.getCharStartIndex());
+                      c.setFunc((PyObject)$etype);
+                      $etype = c;
+                  } else if (o instanceof Subscript) {
+                      Subscript c = (Subscript)o;
+                      c.setCharStartIndex($etype.getCharStartIndex());
+                      c.setValue((PyObject)$etype);
+                      $etype = c;
+                  } else if (o instanceof Attribute) {
+                      Attribute c = (Attribute)o;
+                      c.setCharStartIndex($etype.getCharStartIndex());
+                      c.setValue((PyObject)$etype);
+                      $etype = c;
+                  }
+              }
+          }
+          $etype = new Await($AWAIT, $etype);
+      }
+    | atom (t+=trailer[$atom.start, $atom.tree])*
       {
           $lparen = $atom.lparen;
           //XXX: This could be better.
@@ -1878,9 +1921,6 @@ atom_expr
                       $etype = c;
                   }
               }
-          }
-          if ($AWAIT != null) {
-              $etype = new Await($AWAIT, $etype);
           }
       }
     // XXX remove this once await becomes a proper keyword
@@ -2062,9 +2102,11 @@ lambdef_nocond
 trailer [Token begin, PythonTree ptree]
 @init {
     expr etype = null;
+    Token end = null;
 }
 @after {
     if (etype != null) {
+        etype.setCharStopIndex(((org.antlr.runtime.CommonToken)end).getStopIndex() + 1);
         $trailer.tree = etype;
     }
 }
@@ -2080,13 +2122,18 @@ trailer [Token begin, PythonTree ptree]
        }
       )
       RPAREN
+      {
+            end = $RPAREN;
+      }
     | LBRACK subscriptlist[$begin] RBRACK
       {
           etype = new Subscript($begin, actions.castExpr($ptree), actions.castSlice($subscriptlist.tree), $expr::ctype);
+          end = $RBRACK;
       }
     | DOT attr
       {
           etype = new Attribute($begin, actions.castExpr($ptree), new Name($attr.tree, $attr.text, expr_contextType.Load), $expr::ctype);
+          end = $attr.tree.getToken(); 
       }
     ;
 
@@ -2536,14 +2583,13 @@ Exponent
     ;
 
 INT :   // Hex
-        '0' ('x' | 'X') ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+        '0' ('x' | 'X') ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ ('_' ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+)*
     |   // Octal
-        '0' ('o' | 'O') ( '0' .. '7' )*
-    |   '0'  ( '0' .. '7' )*
+        '0' ('o' | 'O') ( '0' .. '7' )+ ('_' ( '0' .. '7' )+)*
     |   // Binary
-        '0' ('b' | 'B') ( '0' .. '1' )*
+        '0' ('b' | 'B') ( '0' .. '1' )+ ('_' ( '0' .. '1' )+)*
     |   // Decimal
-        '1'..'9' DIGITS*
+        ( '0' .. '9' )+ ('_' ('0'..'9')+)*
 ;
 
 COMPLEX
@@ -2565,7 +2611,7 @@ NAME : LETTER ( LETTER | DIGITS)*
  *  should make us exit loop not continue.
  */
 STRING
-    :   ('r'|'u'|'b'|'ur'|'br'|'R'|'U'|'B'|'UR'|'BR'|'uR'|'Ur'|'Br'|'bR'|'rb'|'rB'|'Rb'|'RB')?
+    :   ('f'|'r'|'u'|'b'|'ur'|'br'|'R'|'U'|'B'|'UR'|'BR'|'uR'|'Ur'|'Br'|'bR'|'rb'|'rB'|'Rb'|'RB')?
         (   '\'\'\'' (options {greedy=false;}:TRIAPOS)* '\'\'\''
         |   '"""' (options {greedy=false;}:TRIQUOTE)* '"""'
         |   '"' (ESC|~('\\'|'\n'|'"'))* '"'
