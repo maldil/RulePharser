@@ -173,4 +173,7 @@ public static final PyType TYPE = PyType.fromClass(Slice.class);
         }
     }
 
+    @Override
+    public int getNodeType(){return SLICE;};
+
 }

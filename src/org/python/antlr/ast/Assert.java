@@ -186,4 +186,7 @@ public static final PyType TYPE = PyType.fromClass(Assert.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return ASSERT;};
+
 }

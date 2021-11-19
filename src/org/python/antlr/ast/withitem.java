@@ -148,4 +148,7 @@ public class withitem extends PythonTree {
         }
     }
 
+    @Override
+    public int getNodeType(){return WITHITEM;};
+
 }

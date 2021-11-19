@@ -44,4 +44,7 @@ public void Add___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(1);
     }
 
+    @Override
+    public int getNodeType(){return ADD;};
+
 }

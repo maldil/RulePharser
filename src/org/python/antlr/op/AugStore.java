@@ -44,4 +44,7 @@ public void AugStore___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(5);
     }
 
+    @Override
+    public int getNodeType(){return AUGSTORE;};
+
 }

@@ -159,4 +159,7 @@ public static final PyType TYPE = PyType.fromClass(Await.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return AWAIT;};
+
 }

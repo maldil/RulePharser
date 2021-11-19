@@ -127,4 +127,7 @@ public static final PyType TYPE = PyType.fromClass(Pass.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return PASS;};
+
 }

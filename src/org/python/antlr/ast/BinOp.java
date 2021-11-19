@@ -206,4 +206,7 @@ public static final PyType TYPE = PyType.fromClass(BinOp.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return BINOP;};
+
 }

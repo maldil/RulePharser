@@ -143,5 +143,7 @@ public class arg extends PythonTree {
             __dict__ = new PyStringMap();
         }
     }
+    @Override
+    public int getNodeType(){return ARG;};
 
 }

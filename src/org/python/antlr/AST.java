@@ -36,4 +36,8 @@ public class AST extends PyObject {
         }
         return Py.TypeError(name + message);
     }
+
+    @Override
+    public int getNodeType(){return AST;};
+
 }

@@ -44,4 +44,7 @@ public void Pow___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(7);
     }
 
+    @Override
+    public int getNodeType(){return POW;};
+
 }

@@ -208,4 +208,8 @@ public static final PyType TYPE = PyType.fromClass(GeneratorExp.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return GENERATOREXP;};
+
+
 }

@@ -44,4 +44,7 @@ public void FloorDiv___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(13);
     }
 
+    @Override
+    public int getNodeType(){return FLOORDIV;};
+
 }

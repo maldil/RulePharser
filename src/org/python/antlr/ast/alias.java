@@ -163,5 +163,9 @@ public class alias extends PythonTree {
             this.asname = asname.getInternalId();
         }
     }
+
+    @Override
+    public int getNodeType(){return ALIAS;};
+
     // End indexer support
 }

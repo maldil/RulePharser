@@ -604,4 +604,7 @@ public class AstList extends PySequence implements Cloneable, List, Traverseproc
     public boolean refersDirectlyTo(PyObject ob) {
         return data.contains(ob);
     }
+
+    @Override
+    public int getNodeType(){return ASTLIST;};
 }

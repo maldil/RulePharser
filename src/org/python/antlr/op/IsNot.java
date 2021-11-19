@@ -44,4 +44,7 @@ public void IsNot___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(8);
     }
 
+    @Override
+    public int getNodeType(){return ISNOT;};
+
 }

@@ -207,4 +207,7 @@ public static final PyType TYPE = PyType.fromClass(AugAssign.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return AUGASSIGN;};
+
 }

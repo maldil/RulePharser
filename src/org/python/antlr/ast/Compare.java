@@ -231,4 +231,8 @@ public static final PyType TYPE = PyType.fromClass(Compare.class);
         col_offset = num;
     }
 
+
+    @Override
+    public int getNodeType(){return COMPARE;};
+
 }

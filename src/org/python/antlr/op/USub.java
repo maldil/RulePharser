@@ -44,4 +44,6 @@ public void USub___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(4);
     }
 
+    @Override
+    public int getNodeType(){return USUB;};
 }

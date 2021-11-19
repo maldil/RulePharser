@@ -236,4 +236,8 @@ public class comprehension extends PythonTree {
             return ob == iter || ob == target || super.refersDirectlyTo(ob);
         }
     }
+
+
+    @Override
+    public int getNodeType(){return COMPREHENSION;};
 }

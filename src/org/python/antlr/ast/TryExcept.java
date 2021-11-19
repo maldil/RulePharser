@@ -275,4 +275,7 @@ public static final PyType TYPE = PyType.fromClass(TryExcept.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return TRYEXCEPT;};
+
 }

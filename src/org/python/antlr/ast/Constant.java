@@ -154,4 +154,7 @@ public static final PyType TYPE = PyType.fromClass(Constant.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return CONSTANT;};
+
 }

@@ -208,4 +208,7 @@ public static final PyType TYPE = PyType.fromClass(ListComp.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return LISTCOMP;};
+
 }

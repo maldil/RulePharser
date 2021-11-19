@@ -44,4 +44,7 @@ public void Lt___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(3);
     }
 
+    @Override
+    public int getNodeType(){return LT;};
+
 }

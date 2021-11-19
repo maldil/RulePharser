@@ -182,4 +182,7 @@ public static final PyType TYPE = PyType.fromClass(Lambda.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return LAMBDA;};
+
 }

@@ -229,5 +229,8 @@ public static final PyType TYPE = PyType.fromClass(Attribute.class);
         this.attrName = attr;
         this.ctx = ctx;
     }
+
+    @Override
+    public int getNodeType(){return ATTRIBUTE;};
     // End indexer support
 }

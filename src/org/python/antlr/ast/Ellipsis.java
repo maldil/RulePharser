@@ -127,4 +127,6 @@ public static final PyType TYPE = PyType.fromClass(Ellipsis.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return ELLIPSIS;};
 }

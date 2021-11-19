@@ -143,4 +143,7 @@ public static final PyType TYPE = PyType.fromClass(Interactive.class);
         }
     }
 
+    @Override
+    public int getNodeType(){return INTERACTIVE;};
+
 }

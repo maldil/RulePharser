@@ -181,4 +181,7 @@ public static final PyType TYPE = PyType.fromClass(Set.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return SETCOMP;};
+
 }

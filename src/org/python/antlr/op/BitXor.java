@@ -44,4 +44,7 @@ public void BitXor___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(11);
     }
 
+    @Override
+    public int getNodeType(){return BITXOR;};
+
 }

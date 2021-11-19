@@ -44,4 +44,7 @@ public void NotIn___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(10);
     }
 
+    @Override
+    public int getNodeType(){return NOTIN;};
+
 }

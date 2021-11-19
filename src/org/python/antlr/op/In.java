@@ -44,4 +44,7 @@ public void In___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(9);
     }
 
+    @Override
+    public int getNodeType(){return IN;};
+
 }

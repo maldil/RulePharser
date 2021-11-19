@@ -39,4 +39,7 @@ public abstract class stmt extends PythonTree {
         super(node);
     }
 
+    @Override
+    public int getNodeType(){return STMT;};
+
 }

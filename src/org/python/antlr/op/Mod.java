@@ -44,4 +44,7 @@ public void Mod___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(6);
     }
 
+    @Override
+    public int getNodeType(){return MOD;};
+
 }

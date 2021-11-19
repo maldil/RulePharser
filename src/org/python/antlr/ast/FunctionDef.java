@@ -338,5 +338,7 @@ public static final PyType TYPE = PyType.fromClass(FunctionDef.class);
             addChild(t);
         }
     }
+    @Override
+    public int getNodeType(){return FUNCTIONDEF;};
     // End indexer support
 }

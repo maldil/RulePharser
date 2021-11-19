@@ -227,4 +227,7 @@ public static final PyType TYPE = PyType.fromClass(TryFinally.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return TRYFINALLY;};
+
 }

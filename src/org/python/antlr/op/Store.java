@@ -44,4 +44,7 @@ public void Store___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(2);
     }
 
+    @Override
+    public int getNodeType(){return STORE;};
+
 }

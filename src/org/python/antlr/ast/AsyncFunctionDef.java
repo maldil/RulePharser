@@ -338,5 +338,8 @@ public static final PyType TYPE = PyType.fromClass(AsyncFunctionDef.class);
             addChild(t);
         }
     }
+
+    @Override
+    public int getNodeType(){return ASYNCFUNCTIONDEF;};
     // End indexer support
 }

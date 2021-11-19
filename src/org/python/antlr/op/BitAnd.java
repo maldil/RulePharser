@@ -44,4 +44,7 @@ public void BitAnd___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(12);
     }
 
+    @Override
+    public int getNodeType(){return BITAND;};
+
 }

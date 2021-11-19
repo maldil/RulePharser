@@ -40,4 +40,7 @@ public abstract class operator extends PythonTree {
         super(node);
     }
 
+    @Override
+    public int getNodeType(){return OPERATOR;};
+
 }

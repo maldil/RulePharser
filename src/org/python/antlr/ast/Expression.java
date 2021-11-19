@@ -121,4 +121,7 @@ public static final PyType TYPE = PyType.fromClass(Expression.class);
         }
     }
 
+    @Override
+    public int getNodeType(){return EXPRESSION;};
+
 }

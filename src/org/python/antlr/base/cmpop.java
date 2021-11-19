@@ -40,4 +40,8 @@ public abstract class cmpop extends PythonTree {
         super(node);
     }
 
+
+    @Override
+    public int getNodeType(){return CMPOP;};
+
 }

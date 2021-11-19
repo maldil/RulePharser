@@ -156,4 +156,6 @@ public class keyword extends PythonTree {
     public boolean refersDirectlyTo(PyObject ob) {
         return ob != null && (ob == value || super.refersDirectlyTo(ob));
     }
+    @Override
+    public int getNodeType(){return KEYWORD;};
 }

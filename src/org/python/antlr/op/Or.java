@@ -44,4 +44,7 @@ public void Or___init__(PyObject[] args, String[] keywords) {}
         return Py.newInteger(2);
     }
 
+    @Override
+    public int getNodeType(){return OR;};
+
 }

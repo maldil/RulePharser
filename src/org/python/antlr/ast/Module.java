@@ -143,4 +143,7 @@ public static final PyType TYPE = PyType.fromClass(Module.class);
         }
     }
 
+    @Override
+    public int getNodeType(){return MODULE;};
+
 }
