@@ -384,9 +384,16 @@ public class PyObject implements Serializable {
         throw new IllegalArgumentException();
     }
 
-    public int getNodeType(){return 0;};
+    public int getNodeType(){throw new UnimplementedError();};
 
-
+    class UnimplementedError extends Error {
+        public UnimplementedError() {
+            super();
+        }
+        public UnimplementedError(String s) {
+            super(s);
+        }
+    }
     private static final String UNORDERABLE_ERROR_MSG = "unorderable types: %s() %s %s()";
 
     public static final PyType TYPE = PyType.fromClass(PyObject.class);
@@ -4570,3 +4577,4 @@ class PyIdentityTuple extends PyObject implements Traverseproc {
         return false;
     }
 }
+
