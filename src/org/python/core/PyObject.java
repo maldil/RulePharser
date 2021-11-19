@@ -384,6 +384,134 @@ public class PyObject implements Serializable {
         throw new IllegalArgumentException();
     }
 
+    public static String nodeClassForASTName(int nodeType) {
+        switch (nodeType) {
+            case ASTLIST :  return "astlist";
+            case AST :  return "AST";
+            case NOTIN :  return "NotIn";
+            case AUGLOAD :  return "AugLoad";
+            case MULT :  return "Mult";
+            case LOAD :  return "Load";
+            case USUB :  return "USub";
+            case LSHIFT :  return "LShift";
+            case ADD :  return "Add";
+            case BITXOR :  return "BitXor";
+            case AUGSTORE :  return "AugStore";
+            case BITOR :  return "BitOr";
+            case DEL :  return "Del";
+            case POW :  return "Pow";
+            case LTE :  return "LtE";
+            case GT :  return "Gt";
+            case IN :  return "In";
+            case BITAND :  return "BitAnd";
+            case DIV :  return "Div";
+            case RSHIFT :  return "RShift";
+            case ISNOT :  return "IsNot";
+            case AND :  return "And";
+            case SUB :  return "Sub";
+            case UADD :  return "UAdd";
+            case FLOORDIV :  return "FloorDiv";
+            case GTE :  return "GtE";
+            case MATMULT :  return "MatMult";
+            case NOTEQ :  return "NotEq";
+            case NOT :  return "Not";
+            case MOD :  return "Mod";
+            case PARAM :  return "Param";
+            case STORE :  return "Store";
+            case EQ :  return "Eq";
+            case INVERT :  return "Invert";
+            case IS :  return "Is";
+            case LT :  return "Lt";
+            case OR :  return "Or";
+            case JOINEDSTR :  return "JoinedStr";
+            case WITH :  return "With";
+            case COMPARE :  return "Compare";
+            case INTERACTIVE :  return "Interactive";
+            case ARG :  return "arg";
+            case CONTINUE :  return "Continue";
+            case EXCEPTHANDLER :  return "ExceptHandler";
+            case COMPREHENSION :  return "comprehension";
+            case INDEX :  return "Index";
+            case LAMBDA :  return "Lambda";
+            case ELLIPSIS :  return "Ellipsis";
+            case WITHITEM :  return "withitem";
+            case STARRED :  return "Starred";
+            case IFEXP :  return "IfExp";
+            case WHILE :  return "While";
+            case ALIAS :  return "alias";
+            case TUPLE :  return "Tuple";
+            case GENERATOREXP :  return "GeneratorExp";
+            case MODULE :  return "Module";
+            case GLOBAL :  return "Global";
+            case ASYNCFOR :  return "AsyncFor";
+            case LIST :  return "List";
+            case BYTES :  return "Bytes";
+            case UNARYOP :  return "UnaryOp";
+            case PASS :  return "Pass";
+            case SUBSCRIPT :  return "Subscript";
+            case TRYFINALLY :  return "TryFinally";
+            case ASSERT :  return "Assert";
+            case STR :  return "Str";
+            case CONSTANT :  return "Constant";
+            case ASSIGN :  return "Assign";
+            case SETCOMP :  return "SetComp";
+            case AWAIT :  return "Await";
+            case TRYEXCEPT :  return "TryExcept";
+            case BOOLOP :  return "BoolOp";
+            case EXPRESSION :  return "Expression";
+            case SUITE :  return "Suite";
+            case CALL :  return "Call";
+            case NUM :  return "Num";
+            case YIELDFROM :  return "YieldFrom";
+            case FUNCTIONDEF :  return "FunctionDef";
+            case ASYNCFUNCTIONDEF :  return "AsyncFunctionDef";
+            case SLICE :  return "Slice";
+            case CLASSDEF :  return "ClassDef";
+            case BINOP :  return "BinOp";
+            case IMPORT :  return "Import";
+            case DICTCOMP :  return "DictComp";
+            case EXTSLICE :  return "ExtSlice";
+            case AUGASSIGN :  return "AugAssign";
+            case NAME :  return "Name";
+            case EXPR :  return "Expr";
+            case ATTRIBUTE :  return "Attribute";
+            case ASTMODULE :  return "AstModule";
+            case RAISE :  return "Raise";
+            case ASYNCWITH :  return "AsyncWith";
+            case RETURN :  return "Return";
+            case BREAK :  return "Break";
+            case DICT :  return "Dict";
+            case IF :  return "If";
+            case NONLOCAL :  return "Nonlocal";
+            case SET :  return "Set";
+            case ARGUMENTS :  return "arguments";
+            case FORMATTEDVALUE :  return "FormattedValue";
+            case DELETE :  return "Delete";
+            case NAMECONSTANT :  return "NameConstant";
+            case KEYWORD :  return "keyword";
+            case IMPORTFROM :  return "ImportFrom";
+            case YIELD :  return "Yield";
+            case LISTCOMP :  return "ListComp";
+            case FOR :  return "For";
+//            case EXCEPTHANDLER :  return "excepthandler";
+            case CMPOP :  return "cmpop";
+            case OPERATOR :  return "operator";
+//            case UNARYOP :  return "unaryop";
+//            case BOOLOP :  return "boolop";
+//            case SLICE :  return "slice";
+            case STMT :  return "stmt";
+            case EXPR_CONTEXT :  return "expr_context";
+//            case EXPR :  return "expr";
+//            case MOD :  return "mod";
+        }
+        throw new IllegalArgumentException();
+
+    }
+
+
+
+
+
     public int getNodeType(){throw new UnimplementedError();};
 
     class UnimplementedError extends Error {
