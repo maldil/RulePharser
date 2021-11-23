@@ -265,6 +265,12 @@ public class PyObject implements Serializable {
     public static final int EXPR_CONTEXT = 115;
 //    public static final int EXPR = 116;
 //    public static final int MOD = 117;
+    public static final int NULL_LITERAL = 116;
+    public static final int EMPTY_STATEMENT = 117;
+    public static final int FIELD_ACCESS = 118;
+    public static final int SELF_EXPRESSION = 119;
+
+
 
 
     public static Class nodeClassForType(int nodeType) {
@@ -503,6 +509,10 @@ public class PyObject implements Serializable {
             case EXPR_CONTEXT :  return "expr_context";
 //            case EXPR :  return "expr";
 //            case MOD :  return "mod";
+            case NULL_LITERAL : return "NullLiteral";
+            case EMPTY_STATEMENT : return "EMPTY_STATEMENT";
+            case FIELD_ACCESS : return "FIELD_ACCESS";
+            case SELF_EXPRESSION : return "SELF_EXPRESSION";
         }
         throw new IllegalArgumentException();
 
