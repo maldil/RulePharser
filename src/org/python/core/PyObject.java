@@ -1,6 +1,6 @@
 // Copyright (c) Corporation for National Research Initiatives
 package org.python.core;
-
+import java.util.*;
 import com.google.common.base.Joiner;
 import org.python.core.stringlib.IntegerFormatter;
 import org.python.core.stringlib.InternalFormat;
@@ -147,7 +147,7 @@ import java.util.Map;
  */
 @ExposedType(name = "object", doc = BuiltinDocs.object_doc)
 public class PyObject implements Serializable {
-
+    private Map<String,Object> propertyMap = new HashMap<>();
     public static final int ASTLIST = 1;
     public static final int AST = 2;
     public static final int NOTIN = 3;
@@ -270,7 +270,13 @@ public class PyObject implements Serializable {
     public static final int FIELD_ACCESS = 118;
     public static final int SELF_EXPRESSION = 119;
 
+    public void setProperty(String propertName, Object property){
+        propertyMap.put(propertName,property);
+    }
 
+    public Object getProperty(String propertName){
+        return propertyMap.get(propertName);
+    }
 
 
     public static Class nodeClassForType(int nodeType) {

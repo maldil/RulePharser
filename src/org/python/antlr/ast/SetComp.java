@@ -207,5 +207,7 @@ public static final PyType TYPE = PyType.fromClass(SetComp.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return SETCOMP;};
 
 }
