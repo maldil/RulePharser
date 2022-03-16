@@ -269,6 +269,8 @@ public class PyObject implements Serializable {
     public static final int EMPTY_STATEMENT = 117;
     public static final int FIELD_ACCESS = 118;
     public static final int SELF_EXPRESSION = 119;
+    public static final int DICTIONARY_ITEM = 120;
+
 
     public void setProperty(String propertName, Object property){
         propertyMap.put(propertName,property);
@@ -519,6 +521,7 @@ public class PyObject implements Serializable {
             case EMPTY_STATEMENT : return "EMPTY_STATEMENT";
             case FIELD_ACCESS : return "FIELD_ACCESS";
             case SELF_EXPRESSION : return "SELF_EXPRESSION";
+            case DICTIONARY_ITEM : return "Dict_Item";
         }
         throw new IllegalArgumentException();
 
