@@ -193,7 +193,7 @@ class JavaVisitor(EmitVisitor):
             self.emit('import org.python.antlr.PythonTree;', depth)
             self.emit('import org.python.core.Py;', depth)
             self.emit('import org.python.core.PyObject;', depth)
-            self.emit('import org.python.core.PyString;', depth)
+            self.emit(' ', depth)
             self.emit('import org.python.core.PyUnicode;', depth)
             self.emit('import org.python.core.PyType;', depth)
             self.emit('import org.python.expose.ExposedGet;', depth)
@@ -761,8 +761,12 @@ indexer_support = {
 "Attribute": """    // Support for indexer below
 
     private Name attrName;
+    private Hole hole;
     public Name getInternalAttrName() {
         return attrName;
+    }
+    public Hole getInternalHole() {
+            return hole;
     }
     public Attribute(Token token, expr value, Name attr, expr_contextType ctx) {
         super(token);
@@ -781,6 +785,14 @@ indexer_support = {
         this.attrName = attr;
         this.ctx = ctx;
     }
+
+    public Attribute(Token token, expr value, Hole attr, expr_contextType ctx) {
+            super(token);
+            this.value = value;
+            addChild(value);
+            this.hole = attr;
+            this.ctx = ctx;
+     }
     // End indexer support
 """,
 

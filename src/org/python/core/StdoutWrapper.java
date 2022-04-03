@@ -2,6 +2,7 @@
 package org.python.core;
 
 import java.io.OutputStream;
+
 import org.python.core.util.StringUtil;
 
 public class StdoutWrapper extends OutputStream {

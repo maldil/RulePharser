@@ -132,6 +132,7 @@ import org.python.antlr.ast.ListComp;
 import org.python.antlr.ast.Lambda;
 import org.python.antlr.ast.Module;
 import org.python.antlr.ast.Name;
+import org.python.antlr.ast.Hole;
 import org.python.antlr.ast.NameConstant;
 import org.python.antlr.ast.Nonlocal;
 import org.python.antlr.ast.Num;
@@ -1985,8 +1986,9 @@ atom
        }
      | INT
        {
-           etype = new Num($INT, actions.makeInt($INT));
+            etype = new Num($INT, actions.makeInt($INT));
        }
+
      | LONGINT
        {
            etype = new Num($LONGINT, actions.makeInt($LONGINT));
@@ -2002,6 +2004,10 @@ atom
      | d=DOT DOT DOT
        {
           etype = new Ellipsis($d);
+       }
+     | DOLLER INT
+       {
+          etype = new Hole($INT, actions.makeInt($INT), $expr::ctype);
        }
      | (S+=STRING)+
        {
@@ -2125,6 +2131,11 @@ trailer [Token begin, PythonTree ptree]
       {
             end = $RPAREN;
       }
+    | DOT LBRACK DOLLER INT RBRACK
+    {
+            etype = new Attribute($begin, actions.castExpr($ptree), new Hole($INT, actions.makeInt($INT), expr_contextType.Load), $expr::ctype);
+            end = $RBRACK;
+    }
     | LBRACK subscriptlist[$begin] RBRACK
       {
           etype = new Subscript($begin, actions.castExpr($ptree), actions.castSlice($subscriptlist.tree), $expr::ctype);
@@ -2508,6 +2519,8 @@ LCURLY    : '{' {implicitLineJoiningLevel++;} ;
 RCURLY    : '}' {implicitLineJoiningLevel--;} ;
 
 CIRCUMFLEX    : '^' ;
+
+DOLLER  : '$' ;
 
 TILDE    : '~' ;
 

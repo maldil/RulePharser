@@ -76,6 +76,7 @@ module Python
          | Compare(expr left, cmpop* ops, expr* comparators)
          | Call(expr func, expr* args, keyword* keywords)
          | Num(object n) -- a number as a PyObject.
+         | Hole(object n, expr_context ctx)
          | Str(string s) -- need to specify raw, unicode, etc?
          | FormattedValue(expr value, int? conversion, expr? format_spec)
          | JoinedStr(expr* values)

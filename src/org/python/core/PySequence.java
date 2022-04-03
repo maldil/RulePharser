@@ -173,7 +173,7 @@ public abstract class PySequence extends PyObject {
     @Override
     public PyObject richCompare(PyObject o, CompareOp op) {
         if (!isSubType(o)) {
-            if (op == EQ) {
+            if (op == CompareOp.EQ) {
                 return Py.False;
             } else if (op == NE) {
                 return Py.True;
@@ -183,7 +183,7 @@ public abstract class PySequence extends PyObject {
         int tl = __len__();
         int ol = o.__len__();
         if (tl != ol) {
-          if (op == EQ) {
+          if (op == CompareOp.EQ) {
               return Py.False;
           } else if (op == NE) {
               return Py.True;

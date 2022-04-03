@@ -120,6 +120,7 @@ ast_While.derived:org.python.antlr.ast.WhileDerived
 ast_With.derived:org.python.antlr.ast.WithDerived
 ast_Yield.derived:org.python.antlr.ast.YieldDerived
 ast_alias.derived:org.python.antlr.ast.aliasDerived
+ast_Hole.derived:org.python.antlr.ast.HoleDerived
 ast_arguments.derived:org.python.antlr.ast.argumentsDerived
 ast_comprehension.derived:org.python.antlr.ast.comprehensionDerived
 ast_keyword.derived:org.python.antlr.ast.keywordDerived

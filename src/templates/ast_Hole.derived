@@ -1,0 +1,4 @@
+base_class: Hole
+want_dict: true
+ctr
+incl: object

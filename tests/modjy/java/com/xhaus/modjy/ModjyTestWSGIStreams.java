@@ -21,7 +21,7 @@
 package com.xhaus.modjy;
 
 import org.python.core.PyDictionary;
-import org.python.core.PyString;
+ 
 
 public class ModjyTestWSGIStreams extends ModjyTestBase {
 
