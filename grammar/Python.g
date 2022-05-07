@@ -133,6 +133,7 @@ import org.python.antlr.ast.Lambda;
 import org.python.antlr.ast.Module;
 import org.python.antlr.ast.Name;
 import org.python.antlr.ast.Hole;
+import org.python.antlr.ast.AlphHole;
 import org.python.antlr.ast.NameConstant;
 import org.python.antlr.ast.Nonlocal;
 import org.python.antlr.ast.Num;
@@ -2005,9 +2006,13 @@ atom
        {
           etype = new Ellipsis($d);
        }
-     | DOLLER INT
+     | PERCENT INT
        {
           etype = new Hole($INT, actions.makeInt($INT), $expr::ctype);
+       }
+     | DOLLER INT
+       {
+               etype = new AlphHole($INT, actions.makeInt($INT), $expr::ctype);
        }
      | (S+=STRING)+
        {
@@ -2132,6 +2137,11 @@ trailer [Token begin, PythonTree ptree]
             end = $RPAREN;
       }
     | DOT LBRACK DOLLER INT RBRACK
+    {
+            etype = new Attribute($begin, actions.castExpr($ptree), new AlphHole($INT, actions.makeInt($INT), expr_contextType.Load), $expr::ctype);
+            end = $RBRACK;
+    }
+    | DOT LBRACK PERCENT INT RBRACK
     {
             etype = new Attribute($begin, actions.castExpr($ptree), new Hole($INT, actions.makeInt($INT), expr_contextType.Load), $expr::ctype);
             end = $RBRACK;

@@ -49,6 +49,7 @@ public interface VisitorIF<R> {
     public R visitCall(Call node) throws Exception;
     public R visitNum(Num node) throws Exception;
     public R visitHole(Hole node) throws Exception;
+    public R visitAlphHole(AlphHole node) throws Exception;
     public R visitStr(Str node) throws Exception;
     public R visitFormattedValue(FormattedValue node) throws Exception;
     public R visitJoinedStr(JoinedStr node) throws Exception;

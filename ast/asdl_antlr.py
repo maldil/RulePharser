@@ -762,6 +762,7 @@ indexer_support = {
 
     private Name attrName;
     private Hole hole;
+    private AlphHole hole;
     public Name getInternalAttrName() {
         return attrName;
     }
@@ -793,6 +794,14 @@ indexer_support = {
             this.hole = attr;
             this.ctx = ctx;
      }
+
+     public Attribute(Token token, expr value, AlphHole attr, expr_contextType ctx) {
+                 super(token);
+                 this.value = value;
+                 addChild(value);
+                 this.hole = attr;
+                 this.ctx = ctx;
+      }
     // End indexer support
 """,
 

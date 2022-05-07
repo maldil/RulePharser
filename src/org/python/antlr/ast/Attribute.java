@@ -165,8 +165,6 @@ public static final PyType TYPE = PyType.fromClass(Attribute.class);
     public void traverse(VisitorIF<?> visitor) throws Exception {
         if (value != null)
             value.accept(visitor);
-        if (hole != null)
-            hole.accept(visitor);
     }
 
     public PyObject __dict__;
@@ -224,12 +222,22 @@ public static final PyType TYPE = PyType.fromClass(Attribute.class);
 
     private Name attrName;
     private Hole hole;
+    private AlphHole ahole;
     public Name getInternalAttrName() {
         return attrName;
     }
     public Hole getInternalHole() {
             return hole;
     }
+    public AlphHole getInternalAlphHole() {
+        return ahole;
+    }
+
+    public void setInternalHole(Hole hole) {
+        this.hole=hole;
+    }
+
+
     public Attribute(Token token, expr value, Name attr, expr_contextType ctx) {
         super(token);
         this.value = value;
@@ -255,5 +263,13 @@ public static final PyType TYPE = PyType.fromClass(Attribute.class);
             this.hole = attr;
             this.ctx = ctx;
      }
+
+     public Attribute(Token token, expr value, AlphHole attr, expr_contextType ctx) {
+                 super(token);
+                 this.value = value;
+                 addChild(value);
+                 this.ahole = attr;
+                 this.ctx = ctx;
+      }
     // End indexer support
 }
