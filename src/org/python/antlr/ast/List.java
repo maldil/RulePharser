@@ -44,6 +44,10 @@ public static final PyType TYPE = PyType.fromClass(List.class);
         this.elts = AstAdapters.py2exprList(elts);
     }
 
+    public void setElts(java.util.List<expr> elts ) {
+        this.elts = elts;
+    }
+
     private expr_contextType ctx;
     public expr_contextType getInternalCtx() {
         return ctx;
@@ -214,5 +218,9 @@ public static final PyType TYPE = PyType.fromClass(List.class);
     public void setCol_offset(int num) {
         col_offset = num;
     }
+
+
+    @Override
+    public int getNodeType(){return LIST;};
 
 }

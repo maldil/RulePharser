@@ -191,4 +191,8 @@ public static final PyType TYPE = PyType.fromClass(Hole.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return HOLE;};
+
+
 }

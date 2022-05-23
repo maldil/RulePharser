@@ -263,4 +263,8 @@ public static final PyType TYPE = PyType.fromClass(While.class);
         col_offset = num;
     }
 
+
+    @Override
+    public int getNodeType(){return WHILE;};
+
 }

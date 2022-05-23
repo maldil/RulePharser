@@ -383,4 +383,7 @@ public class arguments extends PythonTree {
             return super.refersDirectlyTo(ob);
         }
     }
+
+    @Override
+    public int getNodeType(){return ARGUMENTS;};
 }

@@ -57,6 +57,10 @@ public static final PyType TYPE = PyType.fromClass(Call.class);
         this.args = AstAdapters.py2exprList(args);
     }
 
+    public void setArgs(java.util.List<expr> arg) {
+        this.args = arg;
+    }
+
     private java.util.List<keyword> keywords;
     public java.util.List<keyword> getInternalKeywords() {
         return keywords;
@@ -263,5 +267,8 @@ public static final PyType TYPE = PyType.fromClass(Call.class);
     public void setCol_offset(int num) {
         col_offset = num;
     }
+
+    @Override
+    public int getNodeType(){return CALL;};
 
 }

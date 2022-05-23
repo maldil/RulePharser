@@ -178,4 +178,8 @@ public static final PyType TYPE = PyType.fromClass(Nonlocal.class);
         this.nameNodes = nameNodes;
     }
     // End indexer support
+
+
+    @Override
+    public int getNodeType(){return NONLOCAL;};
 }

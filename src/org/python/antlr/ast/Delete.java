@@ -190,4 +190,8 @@ public static final PyType TYPE = PyType.fromClass(Delete.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return DICT;};
+
+
 }

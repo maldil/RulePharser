@@ -178,4 +178,7 @@ public static final PyType TYPE = PyType.fromClass(Global.class);
         this.nameNodes = nameNodes;
     }
     // End indexer support
+
+    @Override
+    public int getNodeType(){return GLOBAL;};
 }

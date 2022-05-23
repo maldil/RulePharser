@@ -141,4 +141,7 @@ public static final PyType TYPE = PyType.fromClass(Break.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return BREAK;};
+
 }

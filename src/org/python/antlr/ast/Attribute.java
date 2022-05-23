@@ -165,6 +165,10 @@ public static final PyType TYPE = PyType.fromClass(Attribute.class);
     public void traverse(VisitorIF<?> visitor) throws Exception {
         if (value != null)
             value.accept(visitor);
+        if (hole != null)
+            hole.accept(visitor);
+        if (ahole  != null)
+            ahole.accept(visitor);
     }
 
     public PyObject __dict__;
@@ -271,5 +275,8 @@ public static final PyType TYPE = PyType.fromClass(Attribute.class);
                  this.ahole = attr;
                  this.ctx = ctx;
       }
+
+    @Override
+    public int getNodeType(){return ATTRIBUTE;};
     // End indexer support
 }

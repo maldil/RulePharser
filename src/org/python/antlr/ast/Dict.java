@@ -43,6 +43,9 @@ public static final PyType TYPE = PyType.fromClass(Dict.class);
     public void setKeys(PyObject keys) {
         this.keys = AstAdapters.py2exprList(keys);
     }
+    public void setKeys(java.util.List<expr> keys) {
+        this.keys =  keys;
+    }
 
     private java.util.List<expr> values;
     public java.util.List<expr> getInternalValues() {
@@ -56,7 +59,9 @@ public static final PyType TYPE = PyType.fromClass(Dict.class);
     public void setValues(PyObject values) {
         this.values = AstAdapters.py2exprList(values);
     }
-
+    public void setValues(java.util.List<expr> values) {
+        this.values =  values;
+    }
 
     private final static PyUnicode[] fields =
     new PyUnicode[] {new PyUnicode("keys"), new PyUnicode("values")};

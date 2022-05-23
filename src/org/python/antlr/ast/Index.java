@@ -132,4 +132,7 @@ public static final PyType TYPE = PyType.fromClass(Index.class);
         }
     }
 
+    @Override
+    public int getNodeType(){return INDEX;};
+
 }

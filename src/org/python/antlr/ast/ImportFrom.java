@@ -262,4 +262,7 @@ public static final PyType TYPE = PyType.fromClass(ImportFrom.class);
         this.level = level;
     }
     // End indexer support
+
+    @Override
+    public int getNodeType(){return IMPORTFROM;};
 }

@@ -166,4 +166,7 @@ public static final PyType TYPE = PyType.fromClass(Bytes.class);
         col_offset = num;
     }
 
+    @Override
+    public int getNodeType(){return BYTES;};
+
 }

@@ -402,5 +402,8 @@ public static final PyType TYPE = PyType.fromClass(ClassDef.class);
             addChild(t);
         }
     }
+
+    @Override
+    public int getNodeType(){return CLASSDEF;};
     // End indexer support
 }

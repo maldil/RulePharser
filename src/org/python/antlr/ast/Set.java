@@ -44,6 +44,9 @@ public static final PyType TYPE = PyType.fromClass(Set.class);
         this.elts = AstAdapters.py2exprList(elts);
     }
 
+    public void setElts(java.util.List<expr> elts) {
+        this.elts =  elts;
+    }
 
     private final static PyUnicode[] fields =
     new PyUnicode[] {new PyUnicode("elts")};
@@ -189,5 +192,9 @@ public static final PyType TYPE = PyType.fromClass(Set.class);
     public void setCol_offset(int num) {
         col_offset = num;
     }
+
+
+    @Override
+    public int getNodeType(){return SET;};
 
 }

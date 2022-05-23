@@ -151,4 +151,6 @@ public static final PyType TYPE = PyType.fromClass(ExtSlice.class);
         }
     }
 
+    @Override
+    public int getNodeType(){return EXTSLICE;};
 }

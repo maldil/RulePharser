@@ -120,6 +120,8 @@ import org.python.antlr.ast.ImportFrom;
 import org.python.antlr.ast.Yield;
 import org.python.antlr.ast.ListComp;
 import org.python.antlr.ast.For;
+import org.python.antlr.ast.Hole;
+import org.python.antlr.ast.AlphHole;
 import org.python.antlr.base.excepthandler;
 import org.python.antlr.base.cmpop;
 
@@ -270,6 +272,8 @@ public class PyObject implements Serializable {
     public static final int FIELD_ACCESS = 118;
     public static final int SELF_EXPRESSION = 119;
     public static final int DICTIONARY_ITEM = 120;
+    public static final int ALPHHOLE = 121;
+    public static final int HOLE = 122;
     public void setProperty(String propertName, Object property){
         propertyMap.put(propertName,property);
     }
@@ -392,6 +396,8 @@ public class PyObject implements Serializable {
             case OPERATOR :  return operator.class;
             case STMT :  return stmt.class;
             case EXPR_CONTEXT :  return expr_context.class;
+            case ALPHHOLE : return AlphHole.class;
+            case HOLE : return  Hole.class;
         }
         throw new IllegalArgumentException();
     }
@@ -520,6 +526,8 @@ public class PyObject implements Serializable {
             case FIELD_ACCESS : return "FIELD_ACCESS";
             case SELF_EXPRESSION : return "SELF_EXPRESSION";
             case DICTIONARY_ITEM : return "Dict_Item";
+            case ALPHHOLE : return "AlphHole";
+            case HOLE : return "LazyHole";
         }
         throw new IllegalArgumentException();
 
