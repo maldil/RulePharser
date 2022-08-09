@@ -154,10 +154,10 @@ public static final PyType TYPE = PyType.fromClass(ImportFrom.class);
         this.level = level;
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "ImportFrom";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "ImportFrom";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("ImportFrom(");

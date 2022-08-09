@@ -174,10 +174,10 @@ public static final PyType TYPE = PyType.fromClass(If.class);
         }
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "If";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "If";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("If(");

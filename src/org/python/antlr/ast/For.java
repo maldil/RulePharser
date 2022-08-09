@@ -198,10 +198,10 @@ public static final PyType TYPE = PyType.fromClass(For.class);
         }
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "For";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "For";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("For(");

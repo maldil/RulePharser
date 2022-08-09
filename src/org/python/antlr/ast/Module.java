@@ -105,10 +105,10 @@ public static final PyType TYPE = PyType.fromClass(Module.class);
         }
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "Module";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "Module";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("Module(");

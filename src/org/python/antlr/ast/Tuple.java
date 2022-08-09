@@ -139,11 +139,11 @@ public static final PyType TYPE = PyType.fromClass(Tuple.class);
         }
         this.ctx = ctx;
     }
-
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "Tuple";
-    }
+//
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "Tuple";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("Tuple(");

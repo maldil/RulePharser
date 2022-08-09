@@ -14,6 +14,8 @@ import org.python.antlr.ast.VisitorIF;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.python.core.NaiveASTFlattener;
+
 public class PythonTree extends AST implements Traverseproc {
 
     public boolean from_future_checked = false;
@@ -198,20 +200,20 @@ public class PythonTree extends AST implements Traverseproc {
         return sb.toString();
     }
 
-    @Override
-    public String toString() {
-        if (isNil()) {
-            return "None";
-        }
-        if ( getAntlrType()==Token.INVALID_TOKEN_TYPE ) {
-            return "<errornode>";
-        }
-        if ( node.getToken()==null ) {
-            return null;
-        }
-
-        return node.getToken().getText() + "(" + this.getLine() + "," + this.getCharPositionInLine() + ")";
-    }
+//    @Override
+//    public String toString() {
+//        if (isNil()) {
+//            return "None";
+//        }
+//        if ( getAntlrType()==Token.INVALID_TOKEN_TYPE ) {
+//            return "<errornode>";
+//        }
+//        if ( node.getToken()==null ) {
+//            return null;
+//        }
+//
+//        return node.getToken().getText() + "(" + this.getLine() + "," + this.getCharPositionInLine() + ")";
+//    }
 
     public String toStringTree() {
         if (children == null || children.size() == 0) {
@@ -462,6 +464,40 @@ public class PythonTree extends AST implements Traverseproc {
             child.setParent(this);
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuffer buffer = new StringBuffer();
+        int p = buffer.length();
+        try {
+            this.appendDebugString(buffer);
+        } catch (RuntimeException var3) {
+            buffer.setLength(p);
+            buffer.append("!");
+            buffer.append(this.standardToString());
+        }
+
+        return buffer.toString();
+    }
+
+    void appendDebugString(StringBuffer buffer) {
+        this.appendPrintString(buffer);
+    }
+
+    final void appendPrintString(StringBuffer buffer) {
+        try {
+            NaiveASTFlattener printer = new NaiveASTFlattener();
+            this.accept(printer);
+            buffer.append(printer.getResult());
+        } catch (Exception var) {
+            buffer.append("Error");
+        }
+    }
+
+    final String standardToString() {
+        return super.toString();
+    }
+
 
 
     /* Traverseproc implementation */

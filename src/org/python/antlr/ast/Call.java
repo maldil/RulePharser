@@ -180,10 +180,10 @@ public static final PyType TYPE = PyType.fromClass(Call.class);
         }
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "Call";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "Call";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("Call(");

@@ -215,10 +215,10 @@ public static final PyType TYPE = PyType.fromClass(FunctionDef.class);
         addChild(returns);
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "FunctionDef";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "FunctionDef";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("FunctionDef(");

@@ -100,11 +100,11 @@ public static final PyType TYPE = PyType.fromClass(Expr.class);
         this.value = value;
         addChild(value);
     }
-
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "Expr";
-    }
+//
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "Expr";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("Expr(");

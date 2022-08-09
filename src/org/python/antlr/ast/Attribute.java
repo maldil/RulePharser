@@ -138,10 +138,10 @@ public static final PyType TYPE = PyType.fromClass(Attribute.class);
         this.ctx = ctx;
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "Attribute";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "Attribute";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("Attribute(");

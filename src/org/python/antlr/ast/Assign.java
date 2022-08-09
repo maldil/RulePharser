@@ -136,11 +136,11 @@ public static final PyType TYPE = PyType.fromClass(Assign.class);
         this.value = value;
         addChild(value);
     }
-
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "Assign";
-    }
+//
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "Assign";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("Assign(");
