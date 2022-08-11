@@ -19,6 +19,7 @@ import org.python.core.NaiveASTFlattener;
 public class PythonTree extends AST implements Traverseproc {
 
     public boolean from_future_checked = false;
+    public boolean isPatternNode = false;
     private int charStartIndex = -1;
     private int charStopIndex = -1;
     private CommonTree node;

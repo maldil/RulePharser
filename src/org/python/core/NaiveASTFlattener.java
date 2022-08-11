@@ -290,6 +290,33 @@ public class NaiveASTFlattener extends Visitor{
     }
 
     @Override
+    public Object visitDict(org.python.antlr.ast.Dict node)  throws Exception {
+        this.buffer.append("{");
+        for (int i=0; i<node.getInternalKeys().size();i++){
+            node.getInternalKeys().get(i).accept(this);
+            this.buffer.append(":");
+            node.getInternalValues().get(i).accept(this);
+            if (i<node.getInternalKeys().size()-1)
+                this.buffer.append(",");
+        }
+        this.buffer.append("}");
+        return null;
+    }
+
+    @Override
+    public Object visitSet(org.python.antlr.ast.Set node)  throws Exception {
+        this.buffer.append("{");
+        for (int i=0; i<node.getInternalElts().size();i++){
+            expr expr = node.getInternalElts().get(i);
+            expr.accept(this);
+            if (i<node.getInternalElts().size()-2)
+                this.buffer.append(", ");
+        }
+        this.buffer.append("}");
+        return null;
+    }
+
+    @Override
     public Object visitFunctionDef(FunctionDef node)  throws Exception {
 //        printIndent();
         this.buffer.append("def ").append(node.getInternalName()).append("(");
@@ -314,6 +341,7 @@ public class NaiveASTFlattener extends Visitor{
         node.getInternalTarget().accept(this);
         this.buffer.append(" in ");
         node.getInternalIter().accept(this);
+        this.buffer.append(":");
         this.buffer.append('\n');
         printBock(node.getInternalBody());
         return null;
