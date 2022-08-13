@@ -23,6 +23,7 @@ public class PythonTree extends AST implements Traverseproc {
     private int charStartIndex = -1;
     private int charStopIndex = -1;
     private CommonTree node;
+    private int mylineNumber = -1;
 
     /** Who is the parent node of this node; if null, implies node is root */
     private PythonTree parent;
@@ -56,7 +57,15 @@ public class PythonTree extends AST implements Traverseproc {
         charStartIndex = tree.getCharStartIndex();
         charStopIndex = tree.getCharStopIndex();
     }
-    
+
+    public int getMyLineNumber(){
+        return mylineNumber;
+    }
+
+    public void setMyLineNumber(int line){
+        this.mylineNumber=line;
+    }
+
     public CommonTree getNode() {
         return node;
     }

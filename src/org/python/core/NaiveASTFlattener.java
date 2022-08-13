@@ -3,6 +3,7 @@ import org.python.antlr.Visitor;
 import org.python.antlr.ast.*;
 import org.python.antlr.base.expr;
 import org.python.antlr.base.stmt;
+import org.python.antlr.base.excepthandler;
 public class NaiveASTFlattener extends Visitor{
     protected StringBuffer buffer = new StringBuffer();
     private int indent = 0;
@@ -23,6 +24,7 @@ public class NaiveASTFlattener extends Visitor{
 
     @Override
     public Object visitAssign(Assign node) throws Exception {
+        printIndent();
         for (expr target : node.getInternalTargets()) {
             target.accept(this);
         }
@@ -251,6 +253,7 @@ public class NaiveASTFlattener extends Visitor{
 
     @Override
     public Object visitExpr(Expr node)  throws Exception {
+        printIndent();
         node.getInternalValue().accept(this);
         return null;
     }
@@ -318,7 +321,7 @@ public class NaiveASTFlattener extends Visitor{
 
     @Override
     public Object visitFunctionDef(FunctionDef node)  throws Exception {
-//        printIndent();
+        printIndent();
         this.buffer.append("def ").append(node.getInternalName()).append("(");
         for (int i =0; i<node.getInternalArgs().getInternalArgs().size();i++){
             node.getInternalArgs().getInternalArgs().get(i).accept(this);
@@ -331,12 +334,12 @@ public class NaiveASTFlattener extends Visitor{
         this.buffer.append("):");
         this.buffer.append('\n');
         printBock(node.getInternalBody());
-//        printIndent();
         return null;
     }
 
     @Override
     public Object visitFor(For node)  throws Exception {
+        printIndent();
         this.buffer.append("for ");
         node.getInternalTarget().accept(this);
         this.buffer.append(" in ");
@@ -429,15 +432,53 @@ public class NaiveASTFlattener extends Visitor{
         return null;
     }
 
+    @Override
+    public Object visitTryExcept(TryExcept node)  throws Exception {
+        printIndent();
+        this.buffer.append("try:\n");
+        printBock(node.getInternalBody());
+        this.buffer.append('\n');
+        for (excepthandler handler : node.getInternalHandlers()) {
+            if (handler instanceof ExceptHandler){
+                printIndent();
+                this.buffer.append("except ");
+                ((ExceptHandler)handler).getInternalType().accept(this);
+                this.buffer.append(":\n");
+                printBock(((ExceptHandler) handler).getInternalBody());
+            }
+        }
+        return null;
+    }
+
     private void printBock(java.util.List<stmt> nodes) throws Exception {
         this.indent++;
+        int i = 0;
         for (org.python.antlr.base.stmt stmt : nodes) {
-            printIndent();
             stmt.accept(this);
-            this.buffer.append('\n');
+            i++;
+            if (i<nodes.size())
+            {
+                this.buffer.append('\n');
+            }
         }
         this.indent--;
+//        printIndent();
+
     }
+
+//    private void printBock(java.util.List<stmt> nodes) throws Exception {
+//        this.indent++;
+//        int i = 0;
+//        for (org.python.antlr.base.stmt stmt : nodes) {
+//            stmt.accept(this);
+//            i++;
+////            if (i<nodes.size()-1)
+////            {
+////                this.buffer.append('\n');
+////            }
+//        }
+//        this.indent--;
+//    }
 
     public String getResult() {
         return this.buffer.toString();
