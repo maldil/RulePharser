@@ -1,22 +1,12 @@
-Jython: Python for the Java Platform
 
-Welcome to Jython 3.5!
-
-This repo is in the very early stages of development of a release of
-Jython 3.5. Planned goals are language and runtime compatibility with
-CPython 3.5, along with continued substantial support of the Python
-ecosystem.
-
-Please see ACKNOWLEDGMENTS for details about Jython's copyright,
-license, contributors, and mailing lists; and NEWS for detailed
-release notes, including bugs fixed, backwards breaking changes, and
-new features.
+RulePharser generates an AST for Comby templates that includes both Python and [Comby](https://comby.live) syntaxes. RulePharser is developed on top of [https://github.com/juliandolby/jython3](Jython3)
 
 
-TODO:
+ 
 
-1. Subclass PyString to BaseBytes class, so that it can share most behaviour with
-bytearray, rename to PyBytes
+Follow the below steps to install RulePharser to your local maven repository
 
-2. Replace most occurrance of PyString with PyUnicode, which are used as string
-before.
+- RUN git clone https://github.com/juliandolby/jython3
+- cd jython3
+- RUN ant
+- RUN mvn install:install-file -Dfile=dist/jython-dev.jar -DgroupId=org.python -DartifactId=jython3 -Dversion=0.0.9-SNAPSHOT -Dpackaging=jar
