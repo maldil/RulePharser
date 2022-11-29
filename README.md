@@ -6,7 +6,7 @@ RulePharser generates an AST for Comby templates that includes both Python and [
 
 Follow the below steps to install RulePharser to your local maven repository
 
-- RUN git clone https://github.com/juliandolby/jython3
-- cd jython3
+- RUN git clone https://github.com/maldil/RulePharser.git
+- cd RulePharser
 - RUN ant
 - RUN mvn install:install-file -Dfile=dist/jython-dev.jar -DgroupId=org.python -DartifactId=jython3 -Dversion=0.0.9-SNAPSHOT -Dpackaging=jar
