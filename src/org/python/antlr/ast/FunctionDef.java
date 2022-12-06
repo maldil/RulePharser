@@ -242,7 +242,15 @@ public static final PyType TYPE = PyType.fromClass(FunctionDef.class);
     }
 
     public <R> R accept(VisitorIF<R> visitor) throws Exception {
-        return visitor.visitFunctionDef(this);
+
+        if (visitor==null){
+            new RuntimeException("Unexpected node: " + this);
+        }else{
+            visitor.preVisit(this);
+            visitor.visitFunctionDef(this);
+            visitor.postVisit(this);
+        }
+        return null;
     }
 
     public void traverse(VisitorIF<?> visitor) throws Exception {

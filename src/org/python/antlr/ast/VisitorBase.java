@@ -26,6 +26,9 @@ import org.python.expose.ExposedSet;
 import org.python.expose.ExposedType;
 
 public abstract class VisitorBase<R> implements VisitorIF<R> {
+
+
+
     public R visitModule(Module node) throws Exception {
         R ret = unhandled_node(node);
         traverse(node);

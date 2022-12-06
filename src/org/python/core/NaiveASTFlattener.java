@@ -489,4 +489,13 @@ public class NaiveASTFlattener extends Visitor{
         for (int i = 0; i < this.indent; i++)
             this.buffer.append("    "); //$NON-NLS-1$
     }
+
+    @Override
+    public void preVisit(PyObject node){};
+
+    @Override
+    public boolean preVisit2(PyObject node){return true;};
+
+    @Override
+    public void postVisit(PyObject node){};
 }

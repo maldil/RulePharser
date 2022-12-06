@@ -1,7 +1,7 @@
 // (C) Copyright 2001 Samuele Pedroni
 
 package org.python.compiler;
-
+import org.python.core.PyObject;
 import org.python.antlr.ParseException;
 import org.python.antlr.Visitor;
 import org.python.antlr.PythonTree;
@@ -500,6 +500,15 @@ public class ScopesCompiler extends Visitor implements ScopeConstants {
 
         return null;
     }
+
+    @Override
+    public void preVisit(PyObject node){};
+
+    @Override
+    public boolean preVisit2(PyObject node){return true;};
+
+    @Override
+    public void postVisit(PyObject node){};
 
     public Object visitExceptHandler(ExceptHandler node) throws Exception {
         traverse(node);

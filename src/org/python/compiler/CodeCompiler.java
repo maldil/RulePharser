@@ -3416,4 +3416,13 @@ public class CodeCompiler extends Visitor implements Opcodes, ClassConstants {
             }
         }
     }
+
+    @Override
+    public void preVisit(PyObject node){};
+
+    @Override
+    public boolean preVisit2(PyObject node){return true;};
+
+    @Override
+    public void postVisit(PyObject node){};
 }
