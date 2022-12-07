@@ -242,7 +242,15 @@ public static final PyType TYPE = PyType.fromClass(AsyncFunctionDef.class);
     }
 
     public <R> R accept(VisitorIF<R> visitor) throws Exception {
-        return visitor.visitAsyncFunctionDef(this);
+        R x = null;
+        if (visitor==null){
+            new RuntimeException("Unexpected node: " + this);
+        }else{
+            visitor.preVisit(this);
+            x = visitor.visitAsyncFunctionDef(this);
+            visitor.postVisit(this);
+        }
+        return x;
     }
 
     public void traverse(VisitorIF<?> visitor) throws Exception {

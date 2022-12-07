@@ -137,7 +137,15 @@ public static final PyType TYPE = PyType.fromClass(UnaryOp.class);
     }
 
     public <R> R accept(VisitorIF<R> visitor) throws Exception {
-        return visitor.visitUnaryOp(this);
+        R x = null;
+        if (visitor==null){
+            new RuntimeException("Unexpected node: " + this);
+        }else{
+            visitor.preVisit(this);
+            x = visitor.visitUnaryOp(this);
+            visitor.postVisit(this);
+        }
+        return x;
     }
 
     public void traverse(VisitorIF<?> visitor) throws Exception {

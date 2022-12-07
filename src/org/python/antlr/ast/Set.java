@@ -134,7 +134,15 @@ public static final PyType TYPE = PyType.fromClass(Set.class);
     }
 
     public <R> R accept(VisitorIF<R> visitor) throws Exception {
-        return visitor.visitSet(this);
+        R x = null;
+        if (visitor==null){
+            new RuntimeException("Unexpected node: " + this);
+        }else{
+            visitor.preVisit(this);
+            x = visitor.visitSet(this);
+            visitor.postVisit(this);
+        }
+        return x;
     }
 
     public void traverse(VisitorIF<?> visitor) throws Exception {

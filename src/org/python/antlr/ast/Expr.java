@@ -116,7 +116,15 @@ public static final PyType TYPE = PyType.fromClass(Expr.class);
     }
 
     public <R> R accept(VisitorIF<R> visitor) throws Exception {
-        return visitor.visitExpr(this);
+        R x = null;
+        if (visitor==null){
+            new RuntimeException("Unexpected node: " + this);
+        }else{
+            visitor.preVisit(this);
+            x = visitor.visitExpr(this);
+            visitor.postVisit(this);
+        }
+        return x;
     }
 
     public void traverse(VisitorIF<?> visitor) throws Exception {
