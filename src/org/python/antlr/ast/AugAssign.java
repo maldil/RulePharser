@@ -140,10 +140,10 @@ public static final PyType TYPE = PyType.fromClass(AugAssign.class);
         addChild(value);
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "AugAssign";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "AugAssign";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("AugAssign(");

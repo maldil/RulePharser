@@ -153,10 +153,10 @@ public static final PyType TYPE = PyType.fromClass(With.class);
         }
     }
 
-    @ExposedGet(name = "repr")
-    public String toString() {
-        return "With";
-    }
+//    @ExposedGet(name = "repr")
+//    public String toString() {
+//        return "With";
+//    }
 
     public String toStringTree() {
         StringBuffer sb = new StringBuffer("With(");

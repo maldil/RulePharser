@@ -94,6 +94,7 @@ public class NaiveASTFlattener extends Visitor{
 
     @Override
     public Object visitAugAssign(AugAssign node)  throws Exception {
+        printIndent();
         node.getInternalTarget().accept(this);
         String op = getOperatorType(node.getInternalOp());
         this.buffer.append(op).append("=");
@@ -101,8 +102,11 @@ public class NaiveASTFlattener extends Visitor{
         return null;
     }
 
+
+
     @Override
     public Object visitTryFinally(TryFinally node)  throws Exception {
+        printIndent();
         this.buffer.append("try:\n");
         printBock(node.getInternalBody());
         printIndent();
@@ -132,6 +136,7 @@ public class NaiveASTFlattener extends Visitor{
 
     @Override
     public Object visitWith(With node)  throws Exception {
+        printIndent();
         this.buffer.append("with ");
         for (int i=0; i<node.getInternalItems().size();i++){
             node.getInternalItems().get(i).getInternalContext_expr().accept(this);
@@ -378,6 +383,7 @@ public class NaiveASTFlattener extends Visitor{
 
     @Override
     public Object visitIf(If node) throws Exception {
+        printIndent();
         this.buffer.append("if ");
         node.getInternalTest().accept(this);
         this.buffer.append(":");
