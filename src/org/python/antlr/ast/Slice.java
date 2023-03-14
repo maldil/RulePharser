@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Slice", base = slice.class)
 public class Slice extends slice {
@@ -195,5 +196,11 @@ public static final PyType TYPE = PyType.fromClass(Slice.class);
 
     @Override
     public int getNodeType(){return SLICE;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

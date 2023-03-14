@@ -27,7 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import org.python.core.ASTMatcher;
 @ExposedType(name = "_ast.Subscript", base = expr.class)
 public class Subscript extends expr implements Context {
 public static final PyType TYPE = PyType.fromClass(Subscript.class);
@@ -230,5 +230,11 @@ public static final PyType TYPE = PyType.fromClass(Subscript.class);
 
     @Override
     public int getNodeType(){return SUBSCRIPT;};
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
 
 }

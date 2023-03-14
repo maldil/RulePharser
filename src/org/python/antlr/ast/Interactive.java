@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Interactive", base = mod.class)
 public class Interactive extends mod {
@@ -158,5 +159,12 @@ public static final PyType TYPE = PyType.fromClass(Interactive.class);
             __dict__ = new PyStringMap();
         }
     }
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

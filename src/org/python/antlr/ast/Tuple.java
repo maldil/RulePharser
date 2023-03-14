@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Tuple", base = expr.class)
 public class Tuple extends expr implements Context {
@@ -232,5 +233,11 @@ public static final PyType TYPE = PyType.fromClass(Tuple.class);
 
     @Override
     public int getNodeType(){return TUPLE;};
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
 
 }

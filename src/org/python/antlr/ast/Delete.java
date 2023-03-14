@@ -199,7 +199,7 @@ public static final PyType TYPE = PyType.fromClass(Delete.class);
     }
 
     @Override
-    public int getNodeType(){return DICT;};
+    public int getNodeType(){return DELETE;};
 
 
 }

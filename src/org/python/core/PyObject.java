@@ -4655,6 +4655,13 @@ public class PyObject implements Serializable {
         // OverflowErrors are handled in PyLong.asIndex
         return __index__().asInt();
     }
+
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        System.err.println("Impliment matcher for "+other.getClass().getSimpleName());
+        return true;
+    }
+
+
 }
 
 

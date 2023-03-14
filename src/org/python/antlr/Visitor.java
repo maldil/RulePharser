@@ -1,5 +1,5 @@
 package org.python.antlr;
-
+import org.python.core.PyObject;
 import org.python.antlr.ast.VisitorBase;
 
 public class Visitor extends VisitorBase {
@@ -30,5 +30,15 @@ public class Visitor extends VisitorBase {
     protected Object unhandled_node(PythonTree node) throws Exception {
         return this;
     }
+
+
+    @Override
+    public void postVisit(PyObject node){};
+
+    @Override
+    public boolean preVisit2(PyObject node){return true;};
+
+    @Override
+    public void preVisit(PyObject node){};
 
 }

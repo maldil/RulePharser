@@ -25,6 +25,7 @@ import org.python.expose.ExposedNew;
 import org.python.expose.ExposedSet;
 import org.python.expose.ExposedType;
 
+
 @ExposedType(name = "_ast.excepthandler", base = AST.class)
 public abstract class excepthandler extends PythonTree {
 
@@ -55,5 +56,6 @@ public abstract class excepthandler extends PythonTree {
     public excepthandler(PythonTree node) {
         super(node);
     }
+
 
 }

@@ -27,7 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import org.python.core.ASTMatcher;
 @ExposedType(name = "_ast.Yield", base = expr.class)
 public class Yield extends expr {
 public static final PyType TYPE = PyType.fromClass(Yield.class);
@@ -174,5 +174,10 @@ public static final PyType TYPE = PyType.fromClass(Yield.class);
 
     @Override
     public int getNodeType(){return YIELD;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
 
 }

@@ -175,6 +175,6 @@ public static final PyType TYPE = PyType.fromClass(Constant.class);
     }
 
     @Override
-    public int getNodeType(){return CONSTANT;};
+    public int getNodeType(){return COMPREHENSION;};
 
 }

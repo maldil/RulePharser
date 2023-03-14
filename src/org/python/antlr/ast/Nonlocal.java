@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Nonlocal", base = stmt.class)
 public class Nonlocal extends stmt {
@@ -190,4 +191,10 @@ public static final PyType TYPE = PyType.fromClass(Nonlocal.class);
 
     @Override
     public int getNodeType(){return NONLOCAL;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 }

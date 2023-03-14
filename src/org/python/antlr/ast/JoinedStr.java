@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.JoinedStr", base = expr.class)
 public class JoinedStr extends expr {
@@ -200,5 +201,13 @@ public static final PyType TYPE = PyType.fromClass(JoinedStr.class);
 
     @Override
     public int getNodeType(){return JOINEDSTR;};
+
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

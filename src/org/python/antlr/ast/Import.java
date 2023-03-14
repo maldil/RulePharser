@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Import", base = stmt.class)
 public class Import extends stmt {
@@ -200,5 +201,11 @@ public static final PyType TYPE = PyType.fromClass(Import.class);
 
     @Override
     public int getNodeType(){return IMPORT;};
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
 
 }

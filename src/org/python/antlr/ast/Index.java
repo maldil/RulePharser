@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Index", base = slice.class)
 public class Index extends slice {
@@ -142,5 +143,12 @@ public static final PyType TYPE = PyType.fromClass(Index.class);
 
     @Override
     public int getNodeType(){return INDEX;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
+
 
 }

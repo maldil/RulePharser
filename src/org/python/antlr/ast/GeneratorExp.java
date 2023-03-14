@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.GeneratorExp", base = expr.class)
 public class GeneratorExp extends expr {
@@ -227,5 +228,11 @@ public static final PyType TYPE = PyType.fromClass(GeneratorExp.class);
 
     @Override
     public int getNodeType(){return GENERATOREXP;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

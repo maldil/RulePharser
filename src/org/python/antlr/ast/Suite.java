@@ -27,7 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import org.python.core.ASTMatcher;
 @ExposedType(name = "_ast.Suite", base = mod.class)
 public class Suite extends mod {
 public static final PyType TYPE = PyType.fromClass(Suite.class);
@@ -159,4 +159,8 @@ public static final PyType TYPE = PyType.fromClass(Suite.class);
         }
     }
 
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
 }

@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.SetComp", base = expr.class)
 public class SetComp extends expr {
@@ -227,5 +228,11 @@ public static final PyType TYPE = PyType.fromClass(SetComp.class);
 
     @Override
     public int getNodeType(){return SETCOMP;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

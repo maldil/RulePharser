@@ -27,7 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import org.python.core.ASTMatcher;
 @ExposedType(name = "_ast.withitem", base = AST.class)
 public class withitem extends PythonTree {
     public static final PyType TYPE = PyType.fromClass(withitem.class);
@@ -162,5 +162,10 @@ public class withitem extends PythonTree {
 
     @Override
     public int getNodeType(){return WITHITEM;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
 
 }
