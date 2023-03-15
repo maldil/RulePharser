@@ -27,6 +27,8 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
+
 
 @ExposedType(name = "_ast.Compare", base = expr.class)
 public class Compare extends expr {
@@ -250,5 +252,11 @@ public static final PyType TYPE = PyType.fromClass(Compare.class);
 
     @Override
     public int getNodeType(){return COMPARE;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

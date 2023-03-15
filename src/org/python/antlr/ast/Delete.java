@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Delete", base = stmt.class)
 public class Delete extends stmt {
@@ -200,6 +201,11 @@ public static final PyType TYPE = PyType.fromClass(Delete.class);
 
     @Override
     public int getNodeType(){return DELETE;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
 
 
 }

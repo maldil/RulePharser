@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.arg", base = AST.class)
 public class arg extends PythonTree {
@@ -154,5 +155,11 @@ public class arg extends PythonTree {
             __dict__ = new PyStringMap();
         }
     }
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

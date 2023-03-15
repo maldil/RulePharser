@@ -5,6 +5,7 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import org.python.core.ASTMatcher;
 
 public class ErrorStmt extends stmt {
 
@@ -35,5 +36,11 @@ public class ErrorStmt extends stmt {
     public void traverse(VisitorIF visitor) throws Exception {
         //no op.
     }
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

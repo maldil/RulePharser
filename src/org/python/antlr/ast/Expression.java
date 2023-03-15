@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Expression", base = mod.class)
 public class Expression extends mod {
@@ -138,6 +139,11 @@ public static final PyType TYPE = PyType.fromClass(Expression.class);
         if (__dict__ == null) {
             __dict__ = new PyStringMap();
         }
+    }
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
     }
 
 }

@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.AsyncWith", base = stmt.class)
 public class AsyncWith extends stmt {
@@ -246,5 +247,12 @@ public static final PyType TYPE = PyType.fromClass(AsyncWith.class);
 
     @Override
     public int getNodeType(){return ASYNCWITH;};
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

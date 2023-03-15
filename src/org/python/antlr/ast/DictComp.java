@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.DictComp", base = expr.class)
 public class DictComp extends expr {
@@ -254,5 +255,12 @@ public static final PyType TYPE = PyType.fromClass(DictComp.class);
 
     @Override
     public int getNodeType(){return DICTCOMP;};
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

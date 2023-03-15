@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.AsyncFunctionDef", base = stmt.class)
 public class AsyncFunctionDef extends stmt {
@@ -358,4 +359,11 @@ public static final PyType TYPE = PyType.fromClass(AsyncFunctionDef.class);
 //
     @Override
     public int getNodeType(){return ASYNCFUNCTIONDEF;}
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
+
 }

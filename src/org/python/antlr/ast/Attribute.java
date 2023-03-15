@@ -27,6 +27,8 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
+
 
 @ExposedType(name = "_ast.Attribute", base = expr.class)
 public class Attribute extends expr implements Context {
@@ -287,4 +289,11 @@ public static final PyType TYPE = PyType.fromClass(Attribute.class);
     @Override
     public int getNodeType(){return ATTRIBUTE;};
     // End indexer support
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 }

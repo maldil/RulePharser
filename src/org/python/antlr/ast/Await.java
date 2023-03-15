@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Await", base = expr.class)
 public class Await extends expr {
@@ -181,5 +182,11 @@ public static final PyType TYPE = PyType.fromClass(Await.class);
 
     @Override
     public int getNodeType(){return AWAIT;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

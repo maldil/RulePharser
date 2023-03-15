@@ -1,13 +1,406 @@
 package org.python.core;
 import org.python.antlr.ast.*;
 import org.python.antlr.base.*;
+import org.python.core.PyUnicode;
 import java.util.List;
 import java.util.Iterator;
+
 public class ASTMatcher {
     public ASTMatcher() {
 
     }
 
+
+    public boolean match(PyUnicode node, Object other) {
+        if (!(other instanceof PyUnicode)) {
+            return false;
+        } else {
+            PyUnicode o = (PyUnicode) other;
+            return o.getString().equals(node.getString());
+        }
+    }
+
+    public boolean match(org.python.antlr.ast.While node, Object other) {
+        if (!(other instanceof org.python.antlr.ast.While)) {
+            return false;
+        } else {
+            org.python.antlr.ast.While o = (org.python.antlr.ast.While) other;
+            return this.safeSubtreeListMatch(node.getInternalOrelse(), o.getInternalOrelse()) &&
+                    this.safeSubtreeListMatch(node.getInternalBody(), o.getInternalBody()) &&
+                    this.safeSubtreeMatch(node.getInternalTest(), o.getInternalTest());
+        }
+    }
+
+    public boolean match(alias node, Object other) {
+        if (!(other instanceof alias)) {
+            return false;
+        } else {
+            alias o = (alias) other;
+            return this.safeSubtreeListMatch(node.getInternalNameNodes(), o.getInternalNameNodes()) &&
+                    this.safeSubtreeMatch(node.getInternalAsnameNode(), o.getInternalAsnameNode()) ;
+        }
+    }
+
+    public boolean match(arg node, Object other) {
+        if (!(other instanceof arg)) {
+            return false;
+        } else {
+            arg o = (arg) other;
+            return this.safeSubtreeMatch(node.getInternalAnnotation(), o.getInternalAnnotation()) &&
+                    o.getInternalArg().equals(node.getInternalArg());
+        }
+    }
+
+    public boolean match(arguments node, Object other) {
+        if (!(other instanceof arguments)) {
+            return false;
+        } else {
+            arguments o = (arguments) other;
+            return this.safeSubtreeListMatch(node.getInternalArgs(), o.getInternalArgs()) &&
+                    this.safeSubtreeListMatch(node.getInternalDefaults(), o.getInternalDefaults()) &&
+                    this.safeSubtreeListMatch(node.getInternalKw_defaults(), o.getInternalKw_defaults()) &&
+                    this.safeSubtreeListMatch(node.getInternalKwonlyargs(), o.getInternalKwonlyargs()) &&
+                    this.safeSubtreeMatch(node.getInternalVararg(), o.getInternalVararg()) &&
+                    this.safeSubtreeMatch(node.getInternalKwarg(), o.getInternalKwarg());
+        }
+    }
+
+    public boolean match(Assert node, Object other) {
+        if (!(other instanceof Assert)) {
+            return false;
+        } else {
+            Assert o = (Assert) other;
+            return this.safeSubtreeMatch(node.getInternalMsg(), o.getInternalMsg()) &&
+                    this.safeSubtreeMatch(node.getInternalTest(), o.getInternalTest());
+        }
+    }
+
+    public boolean match(Assign node, Object other) {
+        if (!(other instanceof Assign)) {
+            return false;
+        } else {
+            Assign o = (Assign) other;
+            return this.safeSubtreeListMatch(node.getInternalTargets(), o.getInternalTargets()) &&
+                    this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue());
+        }
+    }
+
+    public boolean match(AsyncFor node, Object other) {
+        if (!(other instanceof AsyncFor)) {
+            return false;
+        } else {
+            AsyncFor o = (AsyncFor) other;
+            return this.safeSubtreeListMatch(node.getInternalBody(), o.getInternalBody()) &&
+                    this.safeSubtreeListMatch(node.getInternalOrelse(), o.getInternalOrelse()) &&
+                    this.safeSubtreeMatch(node.getInternalIter(), o.getInternalIter()) &&
+                    this.safeSubtreeMatch(node.getInternalTarget(), o.getInternalTarget());
+        }
+    }
+
+    public boolean match(AsyncFunctionDef node, Object other) {
+        if (!(other instanceof AsyncFunctionDef)) {
+            return false;
+        } else {
+            AsyncFunctionDef o = (AsyncFunctionDef) other;
+            return this.safeSubtreeListMatch(node.getInternalBody(), o.getInternalBody()) &&
+                    this.safeSubtreeMatch(node.getInternalArgs(), o.getInternalArgs()) &&
+                    this.safeSubtreeListMatch(node.getInternalDecorator_list(), o.getInternalDecorator_list()) &&
+                    this.safeSubtreeMatch(node.getInternalNameNode(), o.getInternalNameNode()) &&
+                    this.safeSubtreeMatch(node.getInternalReturnNode(), o.getInternalReturnNode()) &&
+                    this.safeSubtreeMatch(node.getInternalReturns(), o.getInternalReturns())
+                    && this.safeEquals(node.getInternalName(),o.getInternalName());
+        }
+    }
+
+
+    public boolean match(AsyncWith node, Object other) {
+        if (!(other instanceof AsyncWith)) {
+            return false;
+        } else {
+            AsyncWith o = (AsyncWith) other;
+            return this.safeSubtreeListMatch(node.getInternalBody(), o.getInternalBody()) &&
+                    this.safeSubtreeListMatch(node.getInternalItems(), o.getInternalItems());
+        }
+    }
+
+    public boolean match(Attribute node, Object other) {
+        if (!(other instanceof Attribute)) {
+            return false;
+        } else {
+            Attribute o = (Attribute) other;
+            return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue()) &&
+                    this.safeSubtreeMatch(node.getInternalAttrName(), o.getInternalAttrName());
+        }
+    }
+
+    public boolean match(AugAssign node, Object other) {
+        if (!(other instanceof AugAssign)) {
+            return false;
+        } else {
+            AugAssign o = (AugAssign) other;
+            return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue()) &&
+                    this.safeSubtreeMatch(node.getInternalTarget(), o.getInternalTarget()) &&
+                    this.safeEquals(node.getInternalOp(),o.getInternalOp());
+        }
+    }
+
+    public boolean match(Await node, Object other) {
+        if (!(other instanceof Await)) {
+            return false;
+        } else {
+            Await o = (Await) other;
+            return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue()) ;
+        }
+    }
+
+    public boolean match(BinOp node, Object other) {
+        if (!(other instanceof BinOp)) {
+            return false;
+        } else {
+            BinOp o = (BinOp) other;
+            return this.safeSubtreeMatch(node.getInternalRight(), o.getInternalRight()) &&
+                    this.safeEquals(o.getInternalOp(),node.getInternalOp()) &&
+                    this.safeSubtreeMatch(node.getInternalLeft(), o.getInternalLeft()) ;
+        }
+    }
+
+    public boolean match(BoolOp node, Object other) {
+        if (!(other instanceof BoolOp)) {
+            return false;
+        } else {
+            BoolOp o = (BoolOp) other;
+            return this.safeSubtreeListMatch(node.getInternalValues(), o.getInternalValues()) &&
+                    this.safeEquals(o.getInternalOp(),node.getInternalOp());
+        }
+    }
+
+    public boolean match(boolopType node, Object other) {
+        if (!(other instanceof boolopType)) {
+            return false;
+        } else {
+            boolopType o = (boolopType) other;
+            return this.safeEquals(o,node);
+        }
+    }
+
+    public boolean match(Break node, Object other) {
+        if (!(other instanceof Bytes)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean match(Bytes node, Object other) {
+        if (!(other instanceof Bytes)) {
+            return false;
+        } else {
+            Bytes o = (Bytes) other;
+            return node.getInternalS().equals(o.getInternalS());
+        }
+    }
+
+    public boolean match(Call node, Object other) {
+        if (!(other instanceof Call)) {
+            return false;
+        } else {
+            Call o = (Call) other;
+            return this.safeSubtreeListMatch(node.getInternalArgs(), o.getInternalArgs()) &&
+                    this.safeSubtreeListMatch(node.getInternalKeywords(), o.getInternalKeywords()) &&
+                    this.safeSubtreeMatch(node.getInternalFunc(), o.getInternalFunc());
+        }
+    }
+
+    public boolean match(ClassDef node, Object other) {
+        if (!(other instanceof ClassDef)) {
+            return false;
+        } else {
+            ClassDef o = (ClassDef) other;
+            return this.safeSubtreeListMatch(node.getInternalBody(), o.getInternalBody()) &&
+                    this.safeSubtreeListMatch(node.getInternalBases(), o.getInternalBases()) &&
+                    this.safeEquals(node.getInternalName(),o.getInternalName()) &&
+                    this.safeSubtreeListMatch(node.getInternalDecorator_list(), o.getInternalDecorator_list()) &&
+                    this.safeSubtreeListMatch(node.getInternalKeywords(), o.getInternalKeywords()) &&
+                    this.safeSubtreeMatch(node.getInternalNameNode(), o.getInternalNameNode());
+        }
+    }
+
+    public boolean match(cmpopType node, Object other) {
+        if (!(other instanceof cmpopType)) {
+            return false;
+        } else {
+            cmpopType o = (cmpopType) other;
+            return this.safeEquals(o,node);
+        }
+    }
+
+    public boolean match(Compare node, Object other) {
+        if (!(other instanceof Compare)) {
+            return false;
+        } else {
+            Compare o = (Compare) other;
+            return this.safeSubtreeListMatch(node.getInternalComparators(), o.getInternalComparators()) &&
+                    this.safeSubtreeMatch(node.getInternalLeft(), o.getInternalLeft()) &&
+                    this.safeSubtreeListMatch(node.getInternalOps(), o.getInternalOps());
+        }
+    }
+
+    public boolean match(comprehension node, Object other) {
+        if (!(other instanceof comprehension)) {
+            return false;
+        } else {
+            comprehension o = (comprehension) other;
+            return this.safeSubtreeListMatch(node.getInternalIfs(), o.getInternalIfs()) &&
+                    this.safeSubtreeMatch(node.getInternalIter(), o.getInternalIter()) &&
+                    this.safeSubtreeMatch(node.getInternalTarget(), o.getInternalTarget());
+        }
+    }
+
+    public boolean match(Constant node, Object other) {
+        if (!(other instanceof Constant)) {
+            return false;
+        } else {
+            Constant o = (Constant) other;
+            return this.safeEquals(node.getInternalValue(),o.getInternalValue());
+        }
+    }
+
+    public boolean match(org.python.antlr.ast.Continue node, Object other) {
+        if (!(other instanceof org.python.antlr.ast.Continue)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean match(Delete node, Object other) {
+        if (!(other instanceof Delete)) {
+            return false;
+        } else {
+            Delete o = (Delete)other;
+            return this.safeSubtreeListMatch(node.getInternalTargets(), o.getInternalTargets());
+        }
+    }
+
+    public boolean match(Dict node, Object other) {
+        if (!(other instanceof Dict)) {
+            return false;
+        } else {
+            Dict o = (Dict)other;
+            return this.safeSubtreeListMatch(node.getInternalValues(), o.getInternalValues()) &&
+                    this.safeSubtreeListMatch(node.getInternalKeys(), o.getInternalKeys()) ;
+        }
+    }
+
+    public boolean match(DictComp node, Object other) {
+        if (!(other instanceof DictComp)) {
+            return false;
+        } else {
+            DictComp o = (DictComp)other;
+            return this.safeSubtreeListMatch(node.getInternalGenerators(), o.getInternalGenerators()) &&
+                    this.safeSubtreeMatch(node.getInternalKey(), o.getInternalKey()) &&
+                    this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue());
+        }
+    }
+
+    public boolean match(Ellipsis node, Object other) {
+        if (!(other instanceof Ellipsis)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean match(ErrorExpr node, Object other) {
+        if (!(other instanceof ErrorMod)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean match(ErrorMod node, Object other) {
+        if (!(other instanceof ErrorMod)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean match(ErrorSlice node, Object other) {
+        if (!(other instanceof ErrorSlice)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean match(ErrorStmt node, Object other) {
+        if (!(other instanceof ErrorStmt)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean match(Expr node, Object other) {
+        if (!(other instanceof Expr)) {
+            return false;
+        } else {
+            Expr o = (Expr)other;
+            return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue());
+        }
+    }
+
+    public boolean match(expr_contextType node, Object other) {
+        if (!(other instanceof expr_contextType)) {
+            return false;
+        } else {
+            expr_contextType o = (expr_contextType)other;
+            return this.safeEquals(o,other);
+        }
+    }
+
+    public boolean match(Expression node, Object other) {
+        if (!(other instanceof Expression)) {
+            return false;
+        } else {
+            Expression o = (Expression)other;
+            return this.safeSubtreeMatch(node.getInternalBody(), o.getInternalBody());
+        }
+    }
+
+    public boolean match(ExtSlice node, Object other) {
+        if (!(other instanceof ExtSlice)) {
+            return false;
+        } else {
+            ExtSlice o = (ExtSlice)other;
+            return this.safeSubtreeListMatch(node.getInternalDims(), o.getInternalDims());
+        }
+    }
+
+    public boolean match(For node, Object other) {
+        if (!(other instanceof For)) {
+            return false;
+        } else {
+            For o = (For)other;
+            return this.safeSubtreeListMatch(node.getInternalBody(), o.getInternalBody()) &&
+                    this.safeSubtreeListMatch(node.getInternalOrelse(), o.getInternalOrelse()) &&
+                    this.safeSubtreeMatch(node.getInternalIter(), o.getInternalIter()) &&
+                    this.safeSubtreeMatch(node.getInternalTarget(), o.getInternalTarget());
+        }
+    }
+
+    public boolean match(FormattedValue node, Object other) {
+        if (!(other instanceof FormattedValue)) {
+            return false;
+        } else {
+            FormattedValue o = (FormattedValue)other;
+            return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue()) &&
+                    this.safeSubtreeMatch(node.getInternalFormat_spec(), o.getInternalFormat_spec()) &&
+                    this.safeEquals(node.getInternalConversion(), o.getInternalConversion());
+        }
+    }
 
     public boolean match(FunctionDef node, Object other) {
         if (!(other instanceof FunctionDef)) {
@@ -20,7 +413,7 @@ public class ASTMatcher {
                     this.safeSubtreeMatch(node.getInternalNameNode(), o.getInternalNameNode()) &&
                     this.safeSubtreeMatch(node.getInternalReturnNode(), o.getInternalReturnNode()) &&
                     this.safeSubtreeMatch(node.getInternalReturns(), o.getInternalReturns())
-                    && node.getInternalName()== o.getInternalName();
+                    && this.safeEquals(node.getInternalName(), o.getInternalName());
         }
     }
 
@@ -90,8 +483,8 @@ public class ASTMatcher {
             ImportFrom o = (ImportFrom)other;
             return this.safeSubtreeListMatch(node.getInternalModuleNames(), o.getInternalModuleNames())
                     &&  this.safeSubtreeListMatch(node.getInternalNames(), o.getInternalNames())
-                    &&  node.getInternalModule()== o.getInternalModule()
-                    &&  node.getInternalLevel()== o.getInternalLevel();
+                    &&  this.safeEquals(node.getInternalModule(), o.getInternalModule())
+                    &&  this.safeEquals(node.getInternalLevel(), o.getInternalLevel());
         }
     }
 
@@ -128,7 +521,7 @@ public class ASTMatcher {
         } else {
             keyword o = (keyword)other;
             return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue())
-                    &&  node.getInternalArg() == o.getInternalArg();
+                    &&  this.safeEquals(node.getInternalArg() , o.getInternalArg());
         }
     }
 
@@ -184,13 +577,13 @@ public class ASTMatcher {
             return false;
         } else {
             Num o = (Num)other;
-            return node.getInternalN()==o.getInternalN();
+            return this.safeEquals(node.getInternalN(),o.getInternalN());
         }
     }
 
     public boolean match(operatorType node, Object other) {
         operatorType o = (operatorType)other;
-        return node==o;
+        return this.safeEquals(node,o);
     }
 
     public boolean match(Pass node, Object other) {
@@ -246,7 +639,7 @@ public class ASTMatcher {
         } else {
             Starred o = (Starred)other;
             return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue())
-                    && node.getInternalCtx()==o.getInternalCtx();
+                    && this.safeEquals(node.getInternalCtx(),o.getInternalCtx());
         }
     }
 
@@ -275,7 +668,7 @@ public class ASTMatcher {
             Subscript o = (Subscript)other;
             return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue())
                     &&  this.safeSubtreeMatch(node.getInternalSlice(), o.getInternalSlice())
-                    &&  node.getInternalSlice() == o.getInternalSlice();
+                    &&  this.safeEquals(node.getInternalSlice() , o.getInternalSlice());
         }
     }
 
@@ -380,11 +773,9 @@ public class ASTMatcher {
         } else {
             UnaryOp o = (UnaryOp)other;
             return this.safeSubtreeMatch(node.getInternalOperand(), o.getInternalOperand()) &&
-                    node.getInternalOp()==o.getInternalOp();
+                    this.safeEquals(node.getInternalOp(),o.getInternalOp());
         }
     }
-
-
 
     public boolean match(Yield node, Object other) {
         if (!(other instanceof Yield)) {
@@ -415,12 +806,24 @@ public class ASTMatcher {
             while(it1.hasNext()) {
                 PyObject n1 = (PyObject)it1.next();
                 PyObject n2 = (PyObject)it2.next();
-                if (!n1.subtreeMatch(this, n2)) {
+                if (n1!=null && n2!=null && !n1.subtreeMatch(this, n2)) {
                     return false;
                 }
+                else if (n1==null && n2!=null)
+                    return false;
+                else if (n1!=null && n2==null)
+                    return false;
             }
 
             return true;
+        }
+    }
+
+    public static boolean safeEquals(Object o1, Object o2) {
+        if (o1 == o2) {
+            return true;
+        } else {
+            return o1 != null && o2 != null ? o1.equals(o2) : false;
         }
     }
 

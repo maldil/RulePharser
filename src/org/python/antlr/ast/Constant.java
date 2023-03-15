@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Constant", base = expr.class)
 public class Constant extends expr {
@@ -176,5 +177,11 @@ public static final PyType TYPE = PyType.fromClass(Constant.class);
 
     @Override
     public int getNodeType(){return COMPREHENSION;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }

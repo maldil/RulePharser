@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.FormattedValue", base = expr.class)
 public class FormattedValue extends expr {
@@ -226,6 +227,12 @@ public static final PyType TYPE = PyType.fromClass(FormattedValue.class);
     @ExposedSet(name = "col_offset")
     public void setCol_offset(int num) {
         col_offset = num;
+    }
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
     }
 
 }

@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Ellipsis", base = expr.class)
 public class Ellipsis extends expr {
@@ -151,5 +152,10 @@ public static final PyType TYPE = PyType.fromClass(Ellipsis.class);
 
     @Override
     public int getNodeType(){return ELLIPSIS;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
 
 }

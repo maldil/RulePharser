@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.Assert", base = stmt.class)
 public class Assert extends stmt {
@@ -207,5 +208,13 @@ public static final PyType TYPE = PyType.fromClass(Assert.class);
 
     @Override
     public int getNodeType(){return ASSERT;};
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
+
 
 }

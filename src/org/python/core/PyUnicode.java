@@ -28,6 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.python.core.ASTMatcher;
 
 import static org.python.core.stringlib.Encoding.encode_UnicodeEscape;
 
@@ -2494,5 +2495,11 @@ public class PyUnicode extends PySequence implements Iterable {
     @Override
     public PyObject __int__() {
         return Encoding.atol(getString(), 10);
+    }
+
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
     }
 }

@@ -27,6 +27,7 @@ import org.python.expose.ExposedType;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import org.python.core.ASTMatcher;
 
 @ExposedType(name = "_ast.comprehension", base = AST.class)
 public class comprehension extends PythonTree {
@@ -246,4 +247,10 @@ public class comprehension extends PythonTree {
 
     @Override
     public int getNodeType(){return COMPREHENSION;};
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 }

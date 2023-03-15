@@ -2,6 +2,7 @@ package org.python.antlr.ast;
 
 import org.python.antlr.PythonTree;
 import org.python.antlr.base.mod;
+import org.python.core.ASTMatcher;
 
 public class ErrorMod extends mod {
 
@@ -32,5 +33,11 @@ public class ErrorMod extends mod {
     public void traverse(VisitorIF visitor) throws Exception {
         //no op.
     }
+
+    @Override
+    public boolean subtreeMatch(ASTMatcher matcher, Object other) {
+        return matcher.match(this, other);
+    }
+
 
 }
