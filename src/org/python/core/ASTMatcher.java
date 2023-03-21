@@ -10,7 +10,6 @@ public class ASTMatcher {
 
     }
 
-
     public boolean match(PyUnicode node, Object other) {
         if (!(other instanceof PyUnicode)) {
             return false;
@@ -241,7 +240,7 @@ public class ASTMatcher {
             Compare o = (Compare) other;
             return this.safeSubtreeListMatch(node.getInternalComparators(), o.getInternalComparators()) &&
                     this.safeSubtreeMatch(node.getInternalLeft(), o.getInternalLeft()) &&
-                    this.safeSubtreeListMatch(node.getInternalOps(), o.getInternalOps());
+                    this.checkEqual(node.getInternalOps(), o.getInternalOps());
         }
     }
 
@@ -688,7 +687,7 @@ public class ASTMatcher {
             ExceptHandler o = (ExceptHandler)other;
             return this.safeSubtreeListMatch(node.getInternalBody(), o.getInternalBody()) &&
                     this.safeSubtreeMatch(node.getInternalType(), o.getInternalType()) &&
-                    node.getInternalName().equals(o.getInternalName());
+                    this.safeEquals(node.getInternalName(),o.getInternalName());
         }
     }
 
@@ -817,6 +816,28 @@ public class ASTMatcher {
 
             return true;
         }
+    }
+
+    public static boolean checkEqual(List<cmpopType> list1, List<cmpopType> list2) {
+
+        // If the size of the lists is different, they are not equal
+        if (list1.size() != list2.size()) {
+            return false;
+        }
+
+        // Check each element in the lists to see if they are equal
+        for (int i = 0; i < list1.size(); i++) {
+            cmpopType obj1 = list1.get(i);
+            cmpopType obj2 = list2.get(i);
+
+            // If any element is not equal, the lists are not equal
+            if (obj1.equals(obj2)) {
+                return false;
+            }
+        }
+
+        // If all elements are equal, the lists are equal
+        return true;
     }
 
     public static boolean safeEquals(Object o1, Object o2) {

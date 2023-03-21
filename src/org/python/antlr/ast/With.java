@@ -46,6 +46,7 @@ public static final PyType TYPE = PyType.fromClass(With.class);
     }
 
     private java.util.List<stmt> body;
+    private AstList iBody =null;
     public java.util.List<stmt> getInternalBody() {
         return body;
     }
@@ -55,10 +56,15 @@ public static final PyType TYPE = PyType.fromClass(With.class);
     }
     @ExposedSet(name = "body")
     public void setBody(PyObject body) {
+
         this.body = AstAdapters.py2stmtList(body);
+        iBody = new AstList(this.body, AstAdapters.stmtAdapter);
     }
 
-
+    @ExposedGet(name = "iBody")
+    public PyObject getIbody() {
+        return iBody;
+    }
     private final static PyUnicode[] fields =
     new PyUnicode[] {new PyUnicode("items"), new PyUnicode("body")};
     @ExposedGet(name = "_fields")
@@ -112,6 +118,10 @@ public static final PyType TYPE = PyType.fromClass(With.class);
         if (body == null) {
             this.body = new ArrayList<stmt>();
         }
+        else{
+            if (this.iBody==null)
+                this.iBody  = new AstList(this.body, AstAdapters.stmtAdapter);
+        }
         for(PythonTree t : this.body) {
             addChild(t);
         }
@@ -131,6 +141,10 @@ public static final PyType TYPE = PyType.fromClass(With.class);
         if (body == null) {
             this.body = new ArrayList<stmt>();
         }
+        else{
+            if (this.iBody==null)
+                this.iBody  = new AstList(this.body, AstAdapters.stmtAdapter);
+        }
         for(PythonTree t : this.body) {
             addChild(t);
         }
@@ -148,6 +162,10 @@ public static final PyType TYPE = PyType.fromClass(With.class);
         this.body = body;
         if (body == null) {
             this.body = new ArrayList<stmt>();
+        }
+        else{
+            if (this.iBody==null)
+                this.iBody  = new AstList(this.body, AstAdapters.stmtAdapter);
         }
         for(PythonTree t : this.body) {
             addChild(t);

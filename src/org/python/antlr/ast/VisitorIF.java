@@ -67,6 +67,7 @@ public interface VisitorIF<R> {
     public R visitExtSlice(ExtSlice node) throws Exception;
     public R visitIndex(Index node) throws Exception;
     public R visitExceptHandler(ExceptHandler node) throws Exception;
+    public R visitcomprehension(comprehension node) throws Exception;
     public void preVisit(PyObject node);
 
     public boolean preVisit2(PyObject node);

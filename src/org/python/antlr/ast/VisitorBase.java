@@ -27,7 +27,11 @@ import org.python.expose.ExposedType;
 
 public abstract class VisitorBase<R> implements VisitorIF<R> {
 
-
+    public R visitcomprehension(comprehension node) throws Exception {
+        R ret = unhandled_node(node);
+        traverse(node);
+        return ret;
+    }
 
     public R visitModule(Module node) throws Exception {
         R ret = unhandled_node(node);

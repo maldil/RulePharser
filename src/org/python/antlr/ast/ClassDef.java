@@ -46,6 +46,10 @@ public static final PyType TYPE = PyType.fromClass(ClassDef.class);
         this.name = AstAdapters.py2identifier(name);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private java.util.List<expr> bases;
     public java.util.List<expr> getInternalBases() {
         return bases;
