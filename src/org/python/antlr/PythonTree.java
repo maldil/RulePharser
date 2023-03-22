@@ -140,6 +140,8 @@ public class PythonTree extends AST implements Traverseproc {
         return charStartIndex ;
     }
 
+    public int getLength(){ return getCharStopIndex()-getCharStartIndex();}
+
     public void setCharStartIndex(int index) {
         charStartIndex  = index;
     }
