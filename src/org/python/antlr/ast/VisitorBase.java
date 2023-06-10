@@ -27,6 +27,18 @@ import org.python.expose.ExposedType;
 
 public abstract class VisitorBase<R> implements VisitorIF<R> {
 
+    public R visitkeyword(keyword node) throws Exception{
+        R ret = unhandled_node(node);
+        traverse(node);
+        return ret;
+    }
+
+    public R visitarguments(arguments node) throws Exception{
+        R ret = unhandled_node(node);
+        traverse(node);
+        return ret;
+    }
+
     public R visitcomprehension(comprehension node) throws Exception {
         R ret = unhandled_node(node);
         traverse(node);

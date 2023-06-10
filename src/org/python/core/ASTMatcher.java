@@ -666,8 +666,7 @@ public class ASTMatcher {
         } else {
             Subscript o = (Subscript)other;
             return this.safeSubtreeMatch(node.getInternalValue(), o.getInternalValue())
-                    &&  this.safeSubtreeMatch(node.getInternalSlice(), o.getInternalSlice())
-                    &&  this.safeEquals(node.getInternalSlice() , o.getInternalSlice());
+                    &&  this.safeSubtreeMatch(node.getInternalSlice(), o.getInternalSlice());
         }
     }
 
@@ -831,7 +830,7 @@ public class ASTMatcher {
             cmpopType obj2 = list2.get(i);
 
             // If any element is not equal, the lists are not equal
-            if (obj1.equals(obj2)) {
+            if (!obj1.equals(obj2)) {
                 return false;
             }
         }

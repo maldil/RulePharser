@@ -68,6 +68,8 @@ public interface VisitorIF<R> {
     public R visitIndex(Index node) throws Exception;
     public R visitExceptHandler(ExceptHandler node) throws Exception;
     public R visitcomprehension(comprehension node) throws Exception;
+    public R visitarguments(arguments node) throws Exception;
+    public R visitkeyword(keyword node) throws Exception;
     public void preVisit(PyObject node);
 
     public boolean preVisit2(PyObject node);
