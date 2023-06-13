@@ -128,17 +128,17 @@ public class withitem extends PythonTree {
         return sb.toString();
     }
 
-    public <R> R accept(VisitorIF<R> visitor) throws Exception {
-        traverse(visitor);
-        return null;
-    }
-
-    public void traverse(VisitorIF<?> visitor) throws Exception {
-        if (context_expr != null)
-            context_expr.accept(visitor);
-        if (optional_vars != null)
-            optional_vars.accept(visitor);
-    }
+//    public <R> R accept(VisitorIF<R> visitor) throws Exception {
+//        traverse(visitor);
+//        return null;
+//    }
+//
+//    public void traverse(VisitorIF<?> visitor) throws Exception {
+//        if (context_expr != null)
+//            context_expr.accept(visitor);
+//        if (optional_vars != null)
+//            optional_vars.accept(visitor);
+//    }
 
     public PyObject __dict__;
 
@@ -166,6 +166,29 @@ public class withitem extends PythonTree {
     @Override
     public boolean subtreeMatch(ASTMatcher matcher, Object other) {
         return matcher.match(this, other);
+    }
+
+    @Override
+    public <R> R accept(VisitorIF<R> visitor) throws Exception {
+        R x = null;
+        if (visitor==null){
+            new RuntimeException("Unexpected node: " + this);
+        }else{
+            visitor.preVisit(this);
+            x = visitor.visitwithitem(this);
+            visitor.postVisit(this);
+        }
+        return x;
+    }
+
+    @Override
+    public void traverse(VisitorIF<?> visitor) throws Exception {
+        if (context_expr != null) {
+            context_expr.accept(visitor);
+        }
+        if (optional_vars != null) {
+            optional_vars.accept(visitor);
+        }
     }
 
 }

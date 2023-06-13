@@ -141,6 +141,18 @@ public abstract class VisitorBase<R> implements VisitorIF<R> {
         return ret;
     }
 
+    public R visitwithitem(withitem node) throws Exception {
+        R ret = unhandled_node(node);
+        traverse(node);
+        return ret;
+    }
+
+    public R visitarg(arg node) throws Exception {
+        R ret = unhandled_node(node);
+        traverse(node);
+        return ret;
+    }
+
     public R visitAsyncWith(AsyncWith node) throws Exception {
         R ret = unhandled_node(node);
         traverse(node);

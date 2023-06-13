@@ -128,8 +128,17 @@ public class arg extends PythonTree {
     }
 
     public <R> R accept(VisitorIF<R> visitor) throws Exception {
-        traverse(visitor);
-        return null;
+//        traverse(visitor);
+//        return null;
+        R x = null;
+        if (visitor==null){
+            new RuntimeException("Unexpected node: " + this);
+        }else{
+            visitor.preVisit(this);
+            x = visitor.visitarg(this);
+            visitor.postVisit(this);
+        }
+        return x;
     }
 
     public void traverse(VisitorIF<?> visitor) throws Exception {
