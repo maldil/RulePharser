@@ -830,6 +830,12 @@ public class ASTMatcher {
             cmpopType obj2 = list2.get(i);
 
             // If any element is not equal, the lists are not equal
+            if ((obj1==null && obj2!=null) || (obj1!=null && obj2==null)){
+                return false;
+            }
+            else if (obj1==null && obj2==null){
+                return true;
+            }
             if (!obj1.equals(obj2)) {
                 return false;
             }
