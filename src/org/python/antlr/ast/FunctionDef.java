@@ -156,6 +156,10 @@ public static final PyType TYPE = PyType.fromClass(FunctionDef.class);
         setReturns(returns);
     }
 
+    public void setChildren(java.util.List<PythonTree> child){
+        this.children = child;
+    }
+
     public FunctionDef(Token token, String name, arguments args, java.util.List<stmt> body,
     java.util.List<expr> decorator_list, expr returns) {
         super(token);
